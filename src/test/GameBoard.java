@@ -18,6 +18,10 @@
 package test;
 
 import javax.swing.*;
+
+import ball.Ball;
+import brick.Brick;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;

@@ -18,6 +18,9 @@
 package test;
 
 import javax.swing.*;
+
+import ball.Ball;
+
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;

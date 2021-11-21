@@ -1,10 +1,12 @@
-package test;
+package brick;
 
 import java.awt.*;
 import java.awt.Point;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.Random;
+
+import ball.Ball;
 
 /**
  * Created by filippo on 04/09/16.
@@ -225,13 +227,13 @@ abstract public class Brick  {
         if(broken)
             return 0;
         int out  = 0;
-        if(brickFace.contains(b.right))
+        if(brickFace.contains(b.getRight()))
             out = LEFT_IMPACT;
-        else if(brickFace.contains(b.left))
+        else if(brickFace.contains(b.getLeft()))
             out = RIGHT_IMPACT;
-        else if(brickFace.contains(b.up))
+        else if(brickFace.contains(b.getUp()))
             out = DOWN_IMPACT;
-        else if(brickFace.contains(b.down))
+        else if(brickFace.contains(b.getDown()))
             out = UP_IMPACT;
         return out;
     }

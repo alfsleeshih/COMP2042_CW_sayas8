@@ -1,4 +1,4 @@
-package test;
+package ball;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -14,10 +14,10 @@ abstract public class Ball {
 
     private Point2D center;
 
-    Point2D up;
-    Point2D down;
-    Point2D left;
-    Point2D right;
+    private Point2D up;
+    private Point2D down;
+    private Point2D left;
+    private Point2D right;
 
     private Color border;
     private Color inner;
@@ -124,6 +124,22 @@ abstract public class Ball {
 
     public int getSpeedY(){
         return speedY;
+    }
+    
+    public Point2D getUp() {
+    	return up;
+    }
+    
+    public Point2D getDown() {
+    	return down;
+    }
+    
+    public Point2D getLeft() {
+    	return left;
+    }
+    
+    public Point2D getRight() {
+    	return right;
     }
 
 
