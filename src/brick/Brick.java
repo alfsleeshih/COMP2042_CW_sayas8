@@ -67,8 +67,8 @@ abstract public class Brick  {
 
         protected void makeCrack(Point2D point, int direction){
             Rectangle bounds = Brick.this.brickFace.getBounds();
-
-            Point impact = new Point((int)point.getX(),(int)point.getY());
+            
+            Point impact = new Point((int)point.getX(),(int)point.getY()); //impact point of the brick
             Point start = new Point();
             Point end = new Point();
 
@@ -110,7 +110,7 @@ abstract public class Brick  {
             GeneralPath path = new GeneralPath();
 
 
-            path.moveTo(start.x,start.y);
+            path.moveTo(start.x,start.y); //initialize the starting point
 
             double w = (end.x - start.x) / (double)steps;
             double h = (end.y - start.y) / (double)steps;

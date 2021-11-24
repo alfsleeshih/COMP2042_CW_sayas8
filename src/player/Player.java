@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package player;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -33,7 +33,7 @@ public class Player {
     private static final int DEF_MOVE_AMOUNT = 5;
 
     private Rectangle playerFace;
-    private Point ballPoint;
+    private Point ballPoint; //detect the center of the player
     private int moveAmount;
     private int min;
     private int max;

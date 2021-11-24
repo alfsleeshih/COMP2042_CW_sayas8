@@ -19,7 +19,7 @@ package main;
 
 import java.awt.*;
 
-import test.GameFrame;
+import gameGraphics.GameFrame;
 
 
 public class GraphicsMain {

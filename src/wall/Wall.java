@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package test;
+package wall;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -27,6 +27,7 @@ import brick.Brick;
 import brick.CementBrick;
 import brick.ClayBrick;
 import brick.SteelBrick;
+import player.Player;
 
 
 public class Wall {
@@ -40,9 +41,9 @@ public class Wall {
     private Random rnd;
     private Rectangle area;
 
-    Brick[] bricks;
-    Ball ball;
-    Player player;
+    private Brick[] bricks;
+    private Ball ball;
+    private Player player;
 
     private Brick[][] levels;
     private int level;
@@ -67,10 +68,10 @@ public class Wall {
         makeBall(ballPos);
         int speedX,speedY;
         do{
-            speedX = rnd.nextInt(5) - 2;
+            speedX = rnd.nextInt(5) - 2; // -2 -1 1 2
         }while(speedX == 0);
         do{
-            speedY = -rnd.nextInt(3);
+            speedY = -rnd.nextInt(3); // 1 2
         }while(speedY == 0);
 
         ball.setSpeed(speedX,speedY);
@@ -314,6 +315,19 @@ public class Wall {
                 throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
         }
         return  out;
+    }
+    
+    public Ball getBall() {
+    	return this.ball;
+    }
+    
+    public Brick[] getBricks() {
+    	return this.bricks;
+    	
+    }
+    
+    public Player getPlayer() {
+    	return this.player;
     }
 
 }
