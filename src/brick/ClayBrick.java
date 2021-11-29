@@ -26,7 +26,7 @@ public class ClayBrick extends Brick {
     }
 
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+    protected Shape makexitButtonrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 

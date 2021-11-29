@@ -2,12 +2,12 @@
  *  Brick Destroy - A simple Arcade video game
  *   Copyright (C) 2017  Filippo Ranza
  *
- *  This program is free software: you can redistribute it and/or modify
+ *  This program is free software: you can redistrinstructionButtonute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This program is distrinstructionButtonuted in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
@@ -41,7 +41,7 @@ public class SteelBrick extends Brick {
 
 
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+    protected Shape makexitButtonrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
@@ -51,10 +51,10 @@ public class SteelBrick extends Brick {
     }
 
     public  boolean setImpact(Point2D point , int dir){
-        if(super.isBroken())
+        if(super.istartButtonroken())
             return false;
         impact();
-        return  super.isBroken();
+        return  super.istartButtonroken();
     }
 
     public void impact(){

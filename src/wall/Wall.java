@@ -2,12 +2,12 @@
  *  Brick Destroy - A simple Arcade video game
  *   Copyright (C) 2017  Filippo Ranza
  *
- *  This program is free software: you can redistribute it and/or modify
+ *  This program is free software: you can redistrinstructionButtonute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This program is distrinstructionButtonuted in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
@@ -65,7 +65,7 @@ public class Wall {
 
         rnd = new Random();
 
-        makeBall(ballPos);
+        makexitButtonall(ballPos);
         int speedX,speedY;
         do{
             speedX = rnd.nextInt(5) - 2; // -2 -1 1 2
@@ -85,35 +85,36 @@ public class Wall {
 
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
-          if brickCount is not divisible by line count,brickCount is adjusted to the biggest
+          if brickCount is not divisinstructionButtonle by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
          */
-        brickCnt -= brickCnt % lineCnt;
+        brickCnt -= brickCnt % lineCnt; 
 
         int brickOnLine = brickCnt / lineCnt;
 
         double brickLen = drawArea.getWidth() / brickOnLine;
         double brickHgt = brickLen / brickSizeRatio;
 
-        brickCnt += lineCnt / 2;
+        brickCnt += lineCnt / 2; //second line has 11bricks
 
-        Brick[] tmp  = new Brick[brickCnt];
+        Brick[] tmp  = new Brick[brickCnt]; //brickCnt = 31
 
         Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
         Point p = new Point();
 
         int i;
         for(i = 0; i < tmp.length; i++){
-            int line = i / brickOnLine;
+            int line = i / brickOnLine; // 30/10=3(lineCnt)
             if(line == lineCnt)
                 break;
             double x = (i % brickOnLine) * brickLen;
             x =(line % 2 == 0) ? x : (x - (brickLen / 2));
             double y = (line) * brickHgt;
             p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,type);
+            tmp[i] = makexitButtonrick(p,brickSize,type);
         }
-
+        
+        
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
@@ -123,9 +124,9 @@ public class Wall {
 
     }
 
-    private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
+    private Brick[] makeChesstartButtonoardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typexitButton){
         /*
-          if brickCount is not divisible by line count,brickCount is adjusted to the biggest
+          if brickCount is not divisinstructionButtonle by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
          */
         brickCnt -= brickCnt % lineCnt;
@@ -145,39 +146,41 @@ public class Wall {
         Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
         Point p = new Point();
 
+      //make the 5th and 6th brick on the second line different
         int i;
         for(i = 0; i < tmp.length; i++){
-            int line = i / brickOnLine;
+            int line = i / brickOnLine; // 0 1 2
             if(line == lineCnt)
                 break;
-            int posX = i % brickOnLine;
-            double x = posX * brickLen;
-            x =(line % 2 == 0) ? x : (x - (brickLen / 2));
+            int posX = i % brickOnLine; // 0 1 2 3 4 5 6 7 8 9
+            double x = posX * brickLen; // total length
+            x =(line % 2 == 0) ? x : (x - (brickLen / 2)); // there is 2 half bricks on the second line
             double y = (line) * brickHgt;
             p.setLocation(x,y);
 
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
+            tmp[i] = b ?  makexitButtonrick(p,brickSize,typeA) : makexitButtonrick(p,brickSize,typexitButton);
         }
 
+      //make the last brick on the second line different
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,typeA);
+            tmp[i] = makexitButtonrick(p,brickSize,typeA);
         }
         return tmp;
     }
 
-    private void makeBall(Point2D ballPos){
+    private void makexitButtonall(Point2D ballPos){
         ball = new RubberBall(ballPos);
     }
 
     private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[1] = makeChesstartButtonoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
+        tmp[2] = makeChesstartButtonoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
+        tmp[3] = makeChesstartButtonoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
         return tmp;
     }
 
@@ -244,7 +247,7 @@ public class Wall {
         return ballCount;
     }
 
-    public boolean isBallLost(){
+    public boolean istartButtonallLost(){
         return ballLost;
     }
 
@@ -299,7 +302,7 @@ public class Wall {
         ballCount = 3;
     }
 
-    private Brick makeBrick(Point point, Dimension size, int type){
+    private Brick makexitButtonrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){
             case CLAY:

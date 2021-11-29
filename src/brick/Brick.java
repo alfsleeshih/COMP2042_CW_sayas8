@@ -24,8 +24,7 @@ abstract public class Brick  {
     public static final int LEFT_IMPACT = 300;
     public static final int RIGHT_IMPACT = 400;
 
-
-
+    
     public class Crack{
 
         private static final int CRACK_SECTIONS = 3;
@@ -46,7 +45,7 @@ abstract public class Brick  {
         private int steps;
 
 
-        public Crack(int crackDepth, int steps){
+        public Crack(int crackDepth, int steps){ // crackDepth = 1, steps = 35, by default
 
             crack = new GeneralPath();
             this.crackDepth = crackDepth;
@@ -65,7 +64,7 @@ abstract public class Brick  {
             crack.reset();
         }
 
-        protected void makeCrack(Point2D point, int direction){
+        protected void makeCrack(Point2D point, int direction){ 
             Rectangle bounds = Brick.this.brickFace.getBounds();
             
             Point impact = new Point((int)point.getX(),(int)point.getY()); //impact point of the brick
@@ -77,7 +76,7 @@ abstract public class Brick  {
                 case LEFT:
                     start.setLocation(bounds.x + bounds.width, bounds.y);
                     end.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
-                    Point tmp = makeRandomPoint(start,end,VERTICAL);
+                    Point tmp = makeRandomPoint(start,end,VERTICAL); //create random point within the touched edge of the brick
                     makeCrack(impact,tmp);
 
                     break;
@@ -105,18 +104,20 @@ abstract public class Brick  {
             }
         }
 
-        protected void makeCrack(Point start, Point end){
+        protected void makeCrack(Point start, Point end){ 
+        	// start is the touched point of the brick
+        	// end is a new random direction for the ball to go
 
             GeneralPath path = new GeneralPath();
 
 
-            path.moveTo(start.x,start.y); //initialize the starting point
+            path.moveTo(start.x,start.y); //initialize the starting point of the ball
 
-            double w = (end.x - start.x) / (double)steps;
+            double w = (end.x - start.x) / (double)steps; 
             double h = (end.y - start.y) / (double)steps;
 
-            int bound = crackDepth;
-            int jump  = bound * 5;
+            int bound = crackDepth; // 1
+            int jump  = bound * 5; // 5
 
             double x,y;
 
@@ -125,8 +126,8 @@ abstract public class Brick  {
                 x = (i * w) + start.x;
                 y = (i * h) + start.y + randomInBounds(bound);
 
-                if(inMiddle(i,CRACK_SECTIONS,steps))
-                    y += jumps(jump,JUMP_PROBABILITY);
+                if(inMiddle(i,CRACK_SECTIONS,steps)) // CRACK_SECTIONS = 3, by default
+                    y += jumps(jump,JUMP_PROBABILITY); //JUMP_PROBABILITY = 0.7, by default
 
                 path.lineTo(x,y);
 
@@ -138,7 +139,7 @@ abstract public class Brick  {
 
         private int randomInBounds(int bound){
             int n = (bound * 2) + 1;
-            return rnd.nextInt(n) - bound;
+            return rnd.nextInt(n) - bound; // -1 0 1
         }
 
         private boolean inMiddle(int i,int steps,int divisions){
@@ -175,6 +176,7 @@ abstract public class Brick  {
         }
 
     }
+    
 
     private static Random rnd;
 
@@ -194,16 +196,16 @@ abstract public class Brick  {
         rnd = new Random();
         broken = false;
         this.name = name;
-        brickFace = makeBrickFace(pos,size);
+        brickFace = makexitButtonrickFace(pos,size);
         this.border = border;
         this.inner = inner;
         this.fullStrength = this.strength = strength;
 
     }
 
-    protected abstract Shape makeBrickFace(Point pos,Dimension size);
+    protected abstract Shape makexitButtonrickFace(Point pos,Dimension size); 
 
-    public  boolean setImpact(Point2D point , int dir){
+    public  boolean setImpact(Point2D point , int dir){ // the parameters are used in makeCrack1
         if(broken)
             return false;
         impact();
@@ -238,7 +240,7 @@ abstract public class Brick  {
         return out;
     }
 
-    public final boolean isBroken(){
+    public final boolean istartButtonroken(){
         return broken;
     }
 

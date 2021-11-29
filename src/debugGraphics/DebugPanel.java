@@ -2,12 +2,12 @@
  *  Brick Destroy - A simple Arcade video game
  *   Copyright (C) 2017  Filippo Ranza
  *
- *  This program is free software: you can redistribute it and/or modify
+ *  This program is free software: you can redistrinstructionButtonute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This program is distrinstructionButtonuted in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
@@ -46,8 +46,8 @@ public class DebugPanel extends JPanel {
 
         initialize();
 
-        skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
-        resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
+        skipLevel = makexitButtonutton("Skip Level",e -> wall.nextLevel());
+        resetBalls = makexitButtonutton("Reset Balls",e -> wall.resetBallCount());
 
         ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));
         ballYSpeed = makeSlider(-4,4,e -> wall.setBallYSpeed(ballYSpeed.getValue()));
@@ -65,7 +65,7 @@ public class DebugPanel extends JPanel {
         this.setLayout(new GridLayout(2,2));
     }
 
-    private JButton makeButton(String title, ActionListener e){
+    private JButton makexitButtonutton(String title, ActionListener e){
         JButton out = new JButton(title);
         out.addActionListener(e);
         return  out;

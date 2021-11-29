@@ -24,18 +24,18 @@ public class CementBrick extends Brick {
     }
 
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+    protected Shape makexitButtonrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
     @Override
     public boolean setImpact(Point2D point, int dir) {
-        if(super.isBroken())
+        if(super.istartButtonroken())
             return false;
         super.impact();
-        if(!super.isBroken()){
+        if(!super.istartButtonroken()){
             crack.makeCrack(point,dir);
-            updateBrick();
+            updatexitButtonrick();
             return false;
         }
         return true;
@@ -47,8 +47,8 @@ public class CementBrick extends Brick {
         return brickFace;
     }
 
-    private void updateBrick(){
-        if(!super.isBroken()){
+    private void updatexitButtonrick(){
+        if(!super.istartButtonroken()){
             GeneralPath gp = crack.draw();
             gp.append(super.brickFace,false);
             brickFace = gp;

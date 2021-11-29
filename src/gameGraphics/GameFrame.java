@@ -2,12 +2,12 @@
  *  Brick Destroy - A simple Arcade video game
  *   Copyright (C) 2017  Filippo Ranza
  *
- *  This program is free software: you can redistribute it and/or modify
+ *  This program is free software: you can redistrinstructionButtonute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This program is distrinstructionButtonuted in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
@@ -18,6 +18,9 @@
 package gameGraphics;
 
 import javax.swing.*;
+
+import construction.Example;
+
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowEvent;
@@ -42,16 +45,23 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setLayout(new BorderLayout());
 
         gameBoard = new GameBoard(this);
-
-        homeMenu = new HomeMenu(this,new Dimension(450,300));
+        
+        homeMenu = new HomeMenu(this,new Dimension(450,250)); // original dimension was (450,300)
 
         this.add(homeMenu,BorderLayout.CENTER);
+        
+        /*
+        Example example = new Example(this);
+        
+        this.setSize(450,250);
+        this.add(example);
+        */
 
         this.setUndecorated(true);
 
-
     }
 
+    
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -59,8 +69,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.autoLocate();
         this.setVisible(true);
     }
+    
 
-    public void enableGameBoard(){
+    public void enableGamexitButtonoard(){
         this.dispose();
         this.remove(homeMenu);
         this.add(gameBoard,BorderLayout.CENTER);
@@ -83,10 +94,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     public void windowGainedFocus(WindowEvent windowEvent) {
         /*
             the first time the frame loses focus is because
-            it has been disposed to install the GameBoard,
+            it has been disposed to install the GamexitButtonoard,
             so went it regains the focus it's ready to play.
             of course calling a method such as 'onLostFocus'
-            is useful only if the GameBoard as been displayed
+            is useful only if the GamexitButtonoard as been displayed
             at least once
          */
         gaming = true;

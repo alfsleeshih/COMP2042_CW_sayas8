@@ -2,12 +2,12 @@
  *  Brick Destroy - A simple Arcade video game
  *   Copyright (C) 2017  Filippo Ranza
  *
- *  This program is free software: you can redistribute it and/or modify
+ *  This program is free software: you can redistrinstructionButtonute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This program is distrinstructionButtonuted in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
@@ -56,7 +56,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private Font menuFont;
 
-    private Rectangle continueButtonRect;
+    private Rectangle continuexitButtonuttonRect;
     private Rectangle exitButtonRect;
     private Rectangle restartButtonRect;
     private int strLen;
@@ -87,7 +87,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             wall.move();
             wall.findImpacts();
             message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
-            if(wall.isBallLost()){
+            if(wall.istartButtonallLost()){
                 if(wall.ballEnd()){
                     wall.wallReset();
                     message = "Game over";
@@ -138,7 +138,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         drawBall(wall.getBall(),g2d);
 
         for(Brick b : wall.getBricks())
-            if(!b.isBroken())
+            if(!b.istartButtonroken())
                 drawBrick(b,g2d);
 
         drawPlayer(wall.getPlayer(),g2d);
@@ -197,11 +197,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
     private void drawMenu(Graphics2D g2d){
-        obscureGameBoard(g2d);
+        obscureGamexitButtonoard(g2d);
         drawPauseMenu(g2d);
     }
 
-    private void obscureGameBoard(Graphics2D g2d){
+    private void obscureGamexitButtonoard(Graphics2D g2d){
 
         Composite tmp = g2d.getComposite();
         Color tmpColor = g2d.getColor();
@@ -238,10 +238,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         y = this.getHeight() / 4;
 
 
-        if(continueButtonRect == null){
+        if(continuexitButtonuttonRect == null){
             FontRenderContext frc = g2d.getFontRenderContext();
-            continueButtonRect = menuFont.getStringBounds(CONTINUE,frc).getBounds();
-            continueButtonRect.setLocation(x,y-continueButtonRect.height);
+            continuexitButtonuttonRect = menuFont.getStringBounds(CONTINUE,frc).getBounds();
+            continuexitButtonuttonRect.setLocation(x,y-continuexitButtonuttonRect.height);
         }
 
         g2d.drawString(CONTINUE,x,y);
@@ -249,7 +249,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         y *= 2;
 
         if(restartButtonRect == null){
-            restartButtonRect = (Rectangle) continueButtonRect.clone();
+            restartButtonRect = (Rectangle) continuexitButtonuttonRect.clone();
             restartButtonRect.setLocation(x,y-restartButtonRect.height);
         }
 
@@ -258,7 +258,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         y *= 3.0/2;
 
         if(exitButtonRect == null){
-            exitButtonRect = (Rectangle) continueButtonRect.clone();
+            exitButtonRect = (Rectangle) continuexitButtonuttonRect.clone();
             exitButtonRect.setLocation(x,y-exitButtonRect.height);
         }
 
@@ -313,7 +313,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         Point p = mouseEvent.getPoint();
         if(!showPauseMenu)
             return;
-        if(continueButtonRect.contains(p)){
+        if(continuexitButtonuttonRect.contains(p)){
             showPauseMenu = false;
             repaint();
         }
@@ -359,7 +359,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
         if(exitButtonRect != null && showPauseMenu) {
-            if (exitButtonRect.contains(p) || continueButtonRect.contains(p) || restartButtonRect.contains(p))
+            if (exitButtonRect.contains(p) || continuexitButtonuttonRect.contains(p) || restartButtonRect.contains(p))
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             else
                 this.setCursor(Cursor.getDefaultCursor());

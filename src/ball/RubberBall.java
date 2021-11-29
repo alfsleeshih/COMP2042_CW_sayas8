@@ -2,12 +2,12 @@
  *  Brick Destroy - A simple Arcade video game
  *   Copyright (C) 2017  Filippo Ranza
  *
- *  This program is free software: you can redistribute it and/or modify
+ *  This program is free software: you can redistrinstructionButtonute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  This program is distrinstructionButtonuted in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
@@ -35,12 +35,12 @@ public class RubberBall extends Ball {
 
     
     @Override
-    protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
+    protected Shape makexitButtonall(Point2D center, int radiusA, int radiustartButton) {
 
         double x = center.getX() - (radiusA / 2);
-        double y = center.getY() - (radiusB / 2);
+        double y = center.getY() - (radiustartButton / 2);
 
-        return new Ellipse2D.Double(x,y,radiusA,radiusB);
+        return new Ellipse2D.Double(x,y,radiusA,radiustartButton);
     }
     
 }
