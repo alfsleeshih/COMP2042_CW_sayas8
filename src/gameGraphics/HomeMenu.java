@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ActionListener; 
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
@@ -148,11 +148,11 @@ public class HomeMenu extends JComponent implements /*MouseListener, MouseMotion
     
     public void paintComponent(Graphics g){
     	
-    	super.paintComponent(g);
+    	//super.paintComponent(g);
     	
     	//g.drawImage(image,0,0,null);
     	
-    	Graphics2D g2d = (Graphics2D)g;
+    	//Graphics2D g2d = (Graphics2D)g;
     	
     	//g2d.drawImage(image,0,0,null);
     	
@@ -269,183 +269,8 @@ public class HomeMenu extends JComponent implements /*MouseListener, MouseMotion
     
     
     /*
-    private void drawButton(Graphics2D g2d){
-    	
-    	
-        FontRenderContext frc = g2d.getFontRenderContext();
-
-        Rectangle2D txtRect = buttonFont.getStringBounds(START_TEXT,frc);
-        Rectangle2D mTxtRect = buttonFont.getStringBounds(EXIT_TEXT,frc);
-        Rectangle2D iTxtRect = buttonFont.getStringBounds(INSTRUCTION_TEXT,frc);
-
-        g2d.setFont(buttonFont);
-
-        //startButton
-        int x = (menuFace.width - startButton.width) / 2;
-        int y =(int) ((menuFace.height - startButton.height) * 0.6); //original was 0.8
-
-        startButton.setLocation(x,y);
-        
-
-        //set the location of the text
-        x = (int)(startButton.getWidth() - txtRect.getWidth()) / 2;
-        y = (int)(startButton.getHeight() - txtRect.getHeight()) / 2;
-
-        
-        x += startButton.x;
-        y += startButton.y + (startButton.height * 0.9);
-		
-        
-
-        if(startClicked){
-            Color tmp = g2d.getColor();
-            g2d.setColor(CLICKED_BUTTON_COLOR);
-            g2d.draw(startButton);
-            g2d.setColor(CLICKED_TEXT);
-            g2d.drawString(START_TEXT,x,y);
-            g2d.setColor(tmp);
-        }
-        else{
-            g2d.draw(startButton);
-            g2d.drawString(START_TEXT,x,y);
-        }
-
-        //exitButton
-        x = startButton.x;
-        y = startButton.y;
-
-        //y *= 1.2;
-        y += 40;
-
-        menuButton.setLocation(x,y);
-
-        //set the location of the text
-        x = (int)(menuButton.getWidth() - mTxtRect.getWidth()) / 2;
-        y = (int)(menuButton.getHeight() - mTxtRect.getHeight()) / 2;
-
-        x += menuButton.x;
-        y += menuButton.y + (startButton.height * 0.9);
-
-        if(menuClicked){
-            Color tmp = g2d.getColor();
-
-            g2d.setColor(CLICKED_BUTTON_COLOR);
-            g2d.draw(menuButton);
-            g2d.setColor(CLICKED_TEXT);
-            g2d.drawString(EXIT_TEXT,x,y);
-            g2d.setColor(tmp);
-        }
-        else{
-            g2d.draw(menuButton);
-            g2d.drawString(EXIT_TEXT,x,y);
-        }
-        
-        
-        //instructionButton
-        x = startButton.x;
-        y = menuButton.y;
-
-        //y *= 1.2;
-        y += 40;
-
-        instructionButton.setLocation(x,y);
-        
-        x = (int)(instructionButton.getWidth() - iTxtRect.getWidth()) / 2;
-        y = (int)(instructionButton.getHeight() - iTxtRect.getHeight()) / 2;
-
-        x += instructionButton.x;
-        y += instructionButton.y + (startButton.height * 0.9);
-
-        if(instructionClicked){
-            Color tmp = g2d.getColor();
-
-            g2d.setColor(CLICKED_BUTTON_COLOR);
-            g2d.draw(instructionButton);
-            g2d.setColor(CLICKED_TEXT);
-            g2d.drawString(INSTRUCTION_TEXT,x,y);
-            g2d.setColor(tmp);
-        }
-        else{
-            g2d.draw(instructionButton);
-            g2d.drawString(INSTRUCTION_TEXT,x,y);
-        }
-        
-        
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p)){
-           owner.enableGamexitButtonoard();
-
-        }
-        else if(menuButton.contains(p)){
-            System.out.println("Goodbye " + System.getProperty("user.name"));
-            System.exit(0);
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p)){
-            startClicked = true;
-            repaint(startButton.x,startButton.y,startButton.width+1,startButton.height+1);
-
-        }
-        else if(menuButton.contains(p)){
-            menuClicked = true;
-            repaint(menuButton.x,menuButton.y,menuButton.width+1,menuButton.height+1);
-        }
-        else if(instructionButton.contains(p)){
-            instructionClicked = true;
-            repaint(instructionButton.x,instructionButton.y,instructionButton.width+1,instructionButton.height+1);
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-        if(startClicked ){
-            startClicked = false;
-            repaint(startButton.x,startButton.y,startButton.width+1,startButton.height+1);
-        }
-        else if(menuClicked){
-            menuClicked = false;
-            repaint(menuButton.x,menuButton.y,menuButton.width+1,menuButton.height+1);
-        }
-        else if(instructionClicked){
-            menuClicked = false;
-            repaint(instructionButton.x,instructionButton.y,instructionButton.width+1,instructionButton.height+1);
-        }
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
-
-
-    @Override
-    public void mouseDragged(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(startButton.contains(p) || menuButton.contains(p) || instructionButton.contains(p))
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        else
-            this.setCursor(Cursor.getDefaultCursor());
-
-    }
-    */
+     * 
+        */
     
 
 

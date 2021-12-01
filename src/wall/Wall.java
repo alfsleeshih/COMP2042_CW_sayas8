@@ -44,6 +44,7 @@ public class Wall {
     private Brick[] bricks;
     private Ball ball;
     private Player player;
+    private int score;
 
     private Brick[][] levels;
     private int level;
@@ -57,6 +58,8 @@ public class Wall {
 
         this.startPoint = new Point(ballPos);
 
+        initBall(ballPos);
+        
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
 
@@ -65,22 +68,42 @@ public class Wall {
 
         rnd = new Random();
 
-        makexitButtonall(ballPos);
-        int speedX,speedY;
+        /*
+        makeBall(ballPos);
+        
+        int speedX;
+        int speedY;
+        
+        
         do{
             speedX = rnd.nextInt(5) - 2; // -2 -1 1 2
         }while(speedX == 0);
         do{
             speedY = -rnd.nextInt(3); // 1 2
         }while(speedY == 0);
-
+      
         ball.setSpeed(speedX,speedY);
+        */
+        
+        
 
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
+        
+        //player.setPlayerWidth(70);
 
         area = drawArea;
 
 
+    }
+    
+    // construction
+    private void initBall(Point2D ballPos) {
+    	
+    	int speedX = 3;
+    	int speedY = -3;
+    	
+    	ball = new RubberBall(ballPos);
+    	ball.setSpeed(speedX, speedY);
     }
 
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
@@ -111,7 +134,7 @@ public class Wall {
             x =(line % 2 == 0) ? x : (x - (brickLen / 2));
             double y = (line) * brickHgt;
             p.setLocation(x,y);
-            tmp[i] = makexitButtonrick(p,brickSize,type);
+            tmp[i] = makeBrick(p,brickSize,type);
         }
         
         
@@ -125,7 +148,9 @@ public class Wall {
     }
 
     private Brick[] makeChesstartButtonoardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typexitButton){
-        /*
+        
+    	
+    	/*
           if brickCount is not divisinstructionButtonle by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
          */
@@ -159,19 +184,19 @@ public class Wall {
             p.setLocation(x,y);
 
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makexitButtonrick(p,brickSize,typeA) : makexitButtonrick(p,brickSize,typexitButton);
+            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typexitButton);
         }
 
       //make the last brick on the second line different
         for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
             double x = (brickOnLine * brickLen) - (brickLen / 2);
             p.setLocation(x,y);
-            tmp[i] = makexitButtonrick(p,brickSize,typeA);
+            tmp[i] = makeBrick(p,brickSize,typeA);
         }
         return tmp;
     }
 
-    private void makexitButtonall(Point2D ballPos){
+    private void makeBall(Point2D ballPos){
         ball = new RubberBall(ballPos);
     }
 
@@ -198,6 +223,8 @@ public class Wall {
             * because for every brick program checks for horizontal and vertical impacts
             */
             brickCount--;
+            
+            score += 5;
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -247,20 +274,25 @@ public class Wall {
         return ballCount;
     }
 
-    public boolean istartButtonallLost(){
+    public boolean isBallLost(){
         return ballLost;
     }
 
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
-        int speedX,speedY;
+        
+        
+        int speedX = 3;
+        int speedY = -3;
+        /*
         do{
             speedX = rnd.nextInt(5) - 2;
         }while(speedX == 0);
         do{
             speedY = -rnd.nextInt(3);
         }while(speedY == 0);
+        */
 
         ball.setSpeed(speedX,speedY);
         ballLost = false;
@@ -302,7 +334,7 @@ public class Wall {
         ballCount = 3;
     }
 
-    private Brick makexitButtonrick(Point point, Dimension size, int type){
+    private Brick makeBrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){
             case CLAY:
@@ -331,6 +363,10 @@ public class Wall {
     
     public Player getPlayer() {
     	return this.player;
+    }
+    
+    public int getScore() {
+    	return this.score;
     }
 
 }

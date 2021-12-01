@@ -29,7 +29,7 @@ import java.awt.event.WindowListener;
 
 public class DebugConsole extends JDialog implements WindowListener{
 
-    private static final String TITLE = "DexitButtonug Console";
+    private static final String TITLE = "Debug Console";
 
 
     private JFrame owner;

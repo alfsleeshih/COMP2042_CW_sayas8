@@ -196,14 +196,14 @@ abstract public class Brick  {
         rnd = new Random();
         broken = false;
         this.name = name;
-        brickFace = makexitButtonrickFace(pos,size);
+        brickFace = makeBrickFace(pos,size);
         this.border = border;
         this.inner = inner;
         this.fullStrength = this.strength = strength;
 
     }
 
-    protected abstract Shape makexitButtonrickFace(Point pos,Dimension size); 
+    protected abstract Shape makeBrickFace(Point pos,Dimension size); 
 
     public  boolean setImpact(Point2D point , int dir){ // the parameters are used in makeCrack1
         if(broken)
@@ -240,7 +240,7 @@ abstract public class Brick  {
         return out;
     }
 
-    public final boolean istartButtonroken(){
+    public final boolean isBroken(){
         return broken;
     }
 

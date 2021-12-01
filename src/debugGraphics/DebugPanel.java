@@ -29,7 +29,7 @@ import java.awt.event.ActionListener;
 
 public class DebugPanel extends JPanel {
 
-    private static final Color DEF_BKG = Color.WHITE;
+    private static final Color DEF_BKG = Color.black;
 
 
     private JButton skipLevel;

@@ -85,4 +85,8 @@ public class Player {
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
+    
+    public void setPlayerWidth(int width) {
+    	this.playerFace = makeRectangle(width,10);
+    }
 }

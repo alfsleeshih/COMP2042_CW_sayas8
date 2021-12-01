@@ -19,8 +19,6 @@ package gameGraphics;
 
 import javax.swing.*;
 
-import construction.Example;
-
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowEvent;

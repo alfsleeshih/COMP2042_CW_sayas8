@@ -41,14 +41,14 @@ abstract public class Ball {
         right.setLocation(center.getX()+(radiusA/2),center.getY());
 
 
-        ballFace = makexitButtonall(center,radiusA,radiustartButton);
+        ballFace = makeBall(center,radiusA,radiustartButton);
         this.border = border;
         this.inner  = inner;
         speedX = 0;
         speedY = 0;
     }
 
-    protected abstract Shape makexitButtonall(Point2D center,int radiusA,int radiustartButton);
+    protected abstract Shape makeBall(Point2D center,int radiusA,int radiustartButton);
 
     public void move(){
         RectangularShape tmp = (RectangularShape) ballFace;
@@ -96,11 +96,11 @@ abstract public class Ball {
     }
 
     public void reverseX(){
-        speedX *= -1;
+        speedX = -speedX; //original was speed *= -speed
     }
 
     public void reverseY(){
-        speedY *= -1;
+        speedY = -speedY; 
     }
 
     public Color getBorderColor(){
@@ -141,6 +141,11 @@ abstract public class Ball {
     
     public Point2D getRight() {
     	return right;
+    }
+    
+    public void increaseSpeed() {
+    	speedX += 1;
+    	speedY -= 1;
     }
 
 
