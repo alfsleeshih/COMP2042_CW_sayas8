@@ -19,7 +19,15 @@ package wall;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 import ball.Ball;
 import ball.RubberBall;
@@ -45,6 +53,7 @@ public class Wall {
     private Ball ball;
     private Player player;
     private int score;
+    private String highScore;
 
     private Brick[][] levels;
     private int level;
@@ -65,10 +74,14 @@ public class Wall {
 
         ballCount = 3;
         ballLost = false;
-
+        
+        score = 0;
+        highScore = "NOBODY:0";
+        
+        /*
         rnd = new Random();
 
-        /*
+        
         makeBall(ballPos);
         
         int speedX;
@@ -86,12 +99,15 @@ public class Wall {
         */
         
         
-
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
         
-        //player.setPlayerWidth(70);
+        
 
         area = drawArea;
+        
+        if(highScore.equals("")) {
+        	highScore = this.getHighScore();
+        }
 
 
     }
@@ -367,6 +383,89 @@ public class Wall {
     
     public int getScore() {
     	return this.score;
+    }
+    
+    public String getHighScore() { // format: Alf:560
+    	
+    	FileReader readFile = null;
+    	BufferedReader reader = null;
+    	
+    	try
+    	{
+    		readFile = new FileReader("highscore.dat");
+    		reader = new BufferedReader(readFile);
+    		return reader.readLine();
+    	}
+    	
+    	catch (Exception e)
+    	{
+    		return "0"; // if we cannot create the dat file
+    	}
+    	
+    	finally
+    	{
+    		try {
+    			if (reader != null)
+    				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+   
+    }
+    
+    public void checkBreakHighScore() {
+    	
+    	if (highScore.equals(""))
+    	{
+    		return;
+    	}
+    	
+    	else if (score > Integer.parseInt(highScore.split(":")[1]))
+    	{
+    		String name = JOptionPane.showInputDialog("What is your name?");
+    		highScore = name + ":" + score;
+    		
+    		File highScoreFile = new File ("highscore.dat");
+    		if (!highScoreFile.exists())
+    		{
+    			try 
+    			{
+					highScoreFile.createNewFile();
+				} catch (IOException e) 
+    			{
+					e.printStackTrace();
+				}
+    		}
+    		
+    		FileWriter writeFile = null;
+    		BufferedWriter writer = null;
+    		
+    		try
+    		{
+    			writeFile = new FileWriter(highScoreFile);
+    			writer = new BufferedWriter(writeFile);
+    			writer.write(this.highScore);
+    		}
+    		
+    		catch (Exception e) 
+    		{
+    			
+    		}
+    		
+    		finally
+    		{
+    			try 
+    			{
+    				if (writer != null)
+    					writer.close();
+				} 
+    			catch (IOException e) 
+    			{
+					e.printStackTrace();
+				}
+    		}
+    	}
     }
 
 }
