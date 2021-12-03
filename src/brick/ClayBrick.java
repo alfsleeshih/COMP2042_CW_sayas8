@@ -6,9 +6,16 @@ import java.awt.geom.Point2D;
 
 
 /**
- * Created by filippo on 04/09/16.
+ * This class is a child class of the abstract parent class, Brick.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
  *
  */
+
+
 public class ClayBrick extends Brick {
 
     private static final String NAME = "Clay Brick";

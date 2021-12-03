@@ -18,6 +18,17 @@
 package ball;
 
 import java.awt.*;
+
+/**
+ * This class is a child class of the abstract parent class, Ball.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
+
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
@@ -35,12 +46,12 @@ public class RubberBall extends Ball {
 
     
     @Override
-    protected Shape makeBall(Point2D center, int radiusA, int radiustartButton) {
+    protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
 
         double x = center.getX() - (radiusA / 2);
-        double y = center.getY() - (radiustartButton / 2);
+        double y = center.getY() - (radiusB / 2);
 
-        return new Ellipse2D.Double(x,y,radiusA,radiustartButton);
+        return new Ellipse2D.Double(x,y,radiusA,radiusB);
     }
     
 }

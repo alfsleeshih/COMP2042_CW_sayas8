@@ -5,9 +5,15 @@ import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 
 /**
- * Created by filippo on 04/09/16.
+ * This class is an abstract parent class for the types of balls in the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
  *
  */
+
 abstract public class Ball {
 
     private Shape ballFace;
@@ -26,7 +32,16 @@ abstract public class Ball {
     private int speedX;
     private int speedY;
 
-    public Ball(Point2D center, int radiusA, int radiustartButton, Color inner, Color border){
+    /**
+     * This is a constructor method of class Ball, it initializes the speed, color, and surrounding points of the ball.
+     * 
+     * @param center This is the center point of the ball
+     * @param radiusWidth This is the radius from the width of the ball
+     * @param radiusHeight This is the radius from the height of the ball
+     * @param inner This is the inner color of the ball
+     * @param border This is the border color of the ball
+     */
+    public Ball(Point2D center, int radiusWidth, int radiusHeight, Color inner, Color border){
         this.center = center;
 
         up = new Point2D.Double();
@@ -34,22 +49,33 @@ abstract public class Ball {
         left = new Point2D.Double();
         right = new Point2D.Double();
 
-        up.setLocation(center.getX(),center.getY()-(radiustartButton/2));
-        down.setLocation(center.getX(),center.getY()+(radiustartButton/2));
+        up.setLocation(center.getX(),center.getY()-(radiusHeight/2));
+        down.setLocation(center.getX(),center.getY()+(radiusHeight/2));
 
-        left.setLocation(center.getX()-(radiusA/2),center.getY());
-        right.setLocation(center.getX()+(radiusA/2),center.getY());
+        left.setLocation(center.getX()-(radiusWidth/2),center.getY());
+        right.setLocation(center.getX()+(radiusWidth/2),center.getY());
 
 
-        ballFace = makeBall(center,radiusA,radiustartButton);
+        ballFace = makeBall(center,radiusHeight,radiusWidth);
         this.border = border;
         this.inner  = inner;
         speedX = 0;
         speedY = 0;
     }
 
-    protected abstract Shape makeBall(Point2D center,int radiusA,int radiustartButton);
+    /**
+     * This method creates a border shape of the ball.
+     * 
+     * @param center This is the center point of the ball
+     * @param radiusWidth This is the radius from the width of the ball
+     * @param radiusHeight This is the radius from the height of the ball
+     * @return This returns the border shape of the ball
+     */
+    protected abstract Shape makeBall(Point2D center,int radiusWidth,int radiusHeight);
 
+    /**
+     * 	This method moves the ball by changing the center point of the ball according to the speed.
+     */
     public void move(){
         RectangularShape tmp = (RectangularShape) ballFace;
         center.setLocation((center.getX() + speedX),(center.getY() + speedY));
@@ -63,6 +89,11 @@ abstract public class Ball {
         ballFace = tmp;
     }
     
+    /**
+     * This method moves the ball by changing the center point of the ball.
+     * 
+     * @param p This is the destination center point of the ball
+     */
     public void moveTo(Point p){
         center.setLocation(p);
 
@@ -74,12 +105,17 @@ abstract public class Ball {
         ballFace = tmp;
     }
 
+    
     private void setPoints(double width,double height){
-        up.setLocation(center.getX(),center.getY()-(height / 2));
-        down.setLocation(center.getX(),center.getY()+(height / 2));
+    	
+    	double radiusWidth = width / 2;
+    	double radiusHeight = height / 2;
+    	
+        up.setLocation(center.getX(),center.getY()-(radiusHeight));
+        down.setLocation(center.getX(),center.getY()+(radiusHeight));
 
-        left.setLocation(center.getX()-(width / 2),center.getY());
-        right.setLocation(center.getX()+(width / 2),center.getY());
+        left.setLocation(center.getX()-(radiusWidth),center.getY());
+        right.setLocation(center.getX()+(radiusWidth),center.getY());
     }
 
     public void setSpeed(int x,int y){

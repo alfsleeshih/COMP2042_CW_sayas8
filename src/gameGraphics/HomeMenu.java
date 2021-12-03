@@ -31,7 +31,7 @@ public class HomeMenu extends JComponent implements /*MouseListener, MouseMotion
 
     private static final String GREETINGS = "Welcome to:";
     private static final String GAME_TITLE = "BRICK DESTROY";
-    private static final String CREDITS = "VERSION 1.1";
+    private static final String CREDITS = "VERSION 2.0";
     private static final String START_TEXT = "START";
     private static final String EXIT_TEXT = "EXIT";
     private static final String INSTRUCTIONS_TEXT = "INSTRUCTIONS";

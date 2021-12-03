@@ -21,6 +21,15 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
+/**
+ * This class is a child class of the abstract parent class, Brick.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 
 public class SteelBrick extends Brick {
 

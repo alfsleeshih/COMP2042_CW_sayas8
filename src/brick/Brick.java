@@ -9,9 +9,16 @@ import java.util.Random;
 import ball.Ball;
 
 /**
- * Created by filippo on 04/09/16.
+ * This class is an abstract parent class for the types of bricks in the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
  *
  */
+
+
 abstract public class Brick  {
 
     public static final int MIN_CRACK = 1;

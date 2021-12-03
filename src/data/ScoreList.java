@@ -23,6 +23,7 @@ public class ScoreList { // list of data
 	
 	Score liveScore;
 
+	
 	public ScoreList() {
 
 		data = new ArrayList<Score>();
