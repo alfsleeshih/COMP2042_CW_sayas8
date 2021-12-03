@@ -21,7 +21,7 @@ public class InstructionFrame extends JFrame implements ActionListener {
 	
 	public InstructionFrame() {
 		
-		createxitButtonutton();
+		createExitButtonutton();
 		
 		initPanel();
 		
@@ -51,7 +51,7 @@ public class InstructionFrame extends JFrame implements ActionListener {
 		instructionPanel.add(buttonPanel, BorderLayout.SOUTH);
 		
 		instructionPanel.setBorder(BorderFactory.createTitledBorder(
-		BorderFactory.createEtchedBorder(), "INTRUCTION", TitledBorder.CENTER, TitledBorder.TOP));
+		BorderFactory.createEtchedBorder(), "INTRUCTIONS", TitledBorder.CENTER, TitledBorder.TOP));
 		
 		
 		String[][] data = {
@@ -80,7 +80,7 @@ public class InstructionFrame extends JFrame implements ActionListener {
 	
 	
 	
-	public void createxitButtonutton() {
+	public void createExitButtonutton() {
 		
 		okButton = new JButton("OK");
 		

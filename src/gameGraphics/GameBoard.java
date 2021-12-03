@@ -28,6 +28,7 @@ import wall.Wall;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
+import java.io.FileNotFoundException;
 
 
 
@@ -51,10 +52,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Wall wall;
 
     private String message;
+    //private String message2;
 
     private boolean showPauseMenu;
 
     private Font menuFont;
+    private Font inGameFont;
 
     private Rectangle continueButtonRect;
     private Rectangle exitButtonRect;
@@ -74,6 +77,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
 
         menuFont = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
+        inGameFont = new Font("Monospaced",Font.BOLD,15);
 
 
         this.initialize();
@@ -83,16 +87,48 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         debugConsole = new DebugConsole(owner,wall,this);
         //initialize the first level
         wall.nextLevel();
+        
 
         gameTimer = new Timer(10,e ->{
+        	
+        	
+        	
             wall.move();
             wall.findImpacts();
-            message = String.format("Bricks: %d Balls: %d  Score: %d High Score: %s",wall.getBrickCount(),wall.getBallCount(),wall.getScore(),wall.getHighScore());
+            
+            
+            
+            //message = String.format("Bricks: %d \nBalls: %d  \nScore: %d \nHigh Score: %s",wall.getBrickCount(),wall.getBallCount(),wall.getScore(),wall.getScoreList().getHighScore());
+            message = String.format("Bricks: %d \nBalls: %d  \nScore: %d \nHigh Score: %d, %s",
+            		wall.getBrickCount(),
+            		wall.getBallCount(),
+            		wall.getScoreList().getLiveScore().getScore(),
+            		checkHighScoreAvailable(),
+            		checkTimeStampAvailable());
+            
             if(wall.isBallLost()){
+            	
+            	//wall.getScoreList1().printRank();
+            	
                 if(wall.ballEnd()){
+                	//wall.getScoreList().printRank();
                     wall.wallReset();
-                    wall.checkBreakHighScore();
+                    //wall.getScoreList().checkBreakHighScore();
+                    //wall.getScoreList().resetScore();
+                    //wall.getScoreList1().getLiveScore().checkBreakHighScore();
+                    //wall.getScoreList1().getLiveScore().resetScore();
+                    wall.getScoreList().checkBreakHighScore();
+                    wall.getScoreList().breakHighScoreNotify();
+                    try {
+						wall.getScoreList().sortData();
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+                    //wall.getScoreList1().printRank();
+                    wall.getScoreList().getLiveScore().resetScore();
                     message = "Game over";
+                    
                 }
                 wall.ballReset();
                 gameTimer.stop();
@@ -115,6 +151,29 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         });
 
     }
+    
+    private int checkHighScoreAvailable() {
+    	if (wall.getScoreList().getHighScore().getScore() == 0) {
+    		return 0;
+    	}
+    	
+    	else {
+    		return wall.getScoreList().getHighScore().getScore();
+    	}
+    }
+    
+    private String checkTimeStampAvailable() {
+    	
+    	String na = "N/A";
+    	
+    	if (wall.getScoreList().getHighScore().getFormattedTimeStamp().equals("21-01-01 00:00")) {
+    		return "N/A";
+    	}
+    	
+    	else {
+    		return wall.getScoreList().getHighScore().getFormattedTimeStamp();
+    	}
+    }
 
 
 
@@ -127,15 +186,26 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.addMouseMotionListener(this);
     }
 
+    private void drawString(Graphics2D g2d, String text, int x, int y) {
+        for (String line : text.split("\n"))
+            g2d.drawString(line, x, y += g2d.getFontMetrics().getHeight());
+    }
 
-    public void paint(Graphics g){
+    public void paintComponent(Graphics g){
 
         Graphics2D g2d = (Graphics2D) g;
 
         clear(g2d);
 
         g2d.setColor(Color.blue);
-        g2d.drawString(message,250,225);
+        //g2d.drawString(message,250,225);
+        
+        //clear(g2d);
+        //g2d.setColor(Color.blue);
+        //g2d.drawString(message2,250,250);
+        g2d.setFont(inGameFont);
+        drawString(g2d, message, 260, 150);
+        
 
         drawBall(wall.getBall(),g2d);
 
@@ -150,6 +220,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         Toolkit.getDefaultToolkit().sync();
     }
+    
+    /*
+    private void drawString(Graphics2D g2d, String text, int x, int y) {
+        for (String line : text.split("\n"))
+            g.drawString(line, x, y += g2d.getFontMetrics().getHeight());
+    }
+    */
 
     private void clear(Graphics2D g2d){
         Color tmp = g2d.getColor();

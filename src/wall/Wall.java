@@ -35,6 +35,8 @@ import brick.Brick;
 import brick.CementBrick;
 import brick.ClayBrick;
 import brick.SteelBrick;
+import data.ScoreList;
+import data.Score;
 import player.Player;
 
 
@@ -52,8 +54,10 @@ public class Wall {
     private Brick[] bricks;
     private Ball ball;
     private Player player;
-    private int score;
-    private String highScore;
+    //private int score;
+    //private String highScore;
+    //private Score score;
+    ScoreList scoreList;
 
     private Brick[][] levels;
     private int level;
@@ -75,8 +79,8 @@ public class Wall {
         ballCount = 3;
         ballLost = false;
         
-        score = 0;
-        highScore = "NOBODY:0";
+        //score = 0;
+        //highScore = "NOBODY:0";
         
         /*
         rnd = new Random();
@@ -101,13 +105,16 @@ public class Wall {
         
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
         
-        
-
         area = drawArea;
         
+        //score = new Score();
+        scoreList = new ScoreList();
+        
+        /*
         if(highScore.equals("")) {
         	highScore = this.getHighScore();
         }
+        */
 
 
     }
@@ -240,7 +247,9 @@ public class Wall {
             */
             brickCount--;
             
-            score += 5;
+            //score.increaseScore(5);
+            
+            scoreList.getLiveScore().increaseScore(5);
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -301,16 +310,10 @@ public class Wall {
         
         int speedX = 3;
         int speedY = -3;
-        /*
-        do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
-        */
-
+        
         ball.setSpeed(speedX,speedY);
+        
+        //initBall();
         ballLost = false;
     }
 
@@ -381,9 +384,15 @@ public class Wall {
     	return this.player;
     }
     
+    /*
     public int getScore() {
-    	return this.score;
+    	return this.score.getScore();
     }
+    
+    public Score getScoreList() {
+    	return score;
+    }
+    
     
     public String getHighScore() { // format: Alf:560
     	
@@ -467,5 +476,17 @@ public class Wall {
     		}
     	}
     }
+    */
+    
+    //ScoreList scoreList = new ScoreList();
+  
+    
+    public ScoreList getScoreList() {
+    	return scoreList;
+    }
+    
+    
+    
+    
 
 }

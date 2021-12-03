@@ -25,9 +25,13 @@ import gameGraphics.GameFrame;
 public class GraphicsMain {
 
     public static void main(String[] args){
+    
+    	
         EventQueue.invokeLater(() -> new GameFrame().initialize());
     	
     	//new GameFrame();
+        
+        
     }
 
 }

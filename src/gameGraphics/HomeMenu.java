@@ -34,7 +34,8 @@ public class HomeMenu extends JComponent implements /*MouseListener, MouseMotion
     private static final String CREDITS = "VERSION 1.1";
     private static final String START_TEXT = "START";
     private static final String EXIT_TEXT = "EXIT";
-    private static final String INSTRUCTION_TEXT = "INSTRUCTION";
+    private static final String INSTRUCTIONS_TEXT = "INSTRUCTIONS";
+    private static final String HIGHSCORES_TEXT = "HIGHSCORES";
 
     //private static final Color BG_COLOR = Color.GREEN.darker();
     private static final Color BG_COLOR = Color.pink.darker();
@@ -71,6 +72,8 @@ public class HomeMenu extends JComponent implements /*MouseListener, MouseMotion
     JButton startButton;
     JButton exitButton;
     JButton instructionButton;
+    JButton highScoresButton;
+    
     
     int containerWidth;
     int containerHeight;
@@ -130,20 +133,27 @@ public class HomeMenu extends JComponent implements /*MouseListener, MouseMotion
 		int buttonHeight = 30;
 		
         startButton = new JButton(START_TEXT);
-        startButton.setBounds((containerWidth-buttonWidth)/2,130,buttonWidth,buttonHeight);
+        startButton.setBounds((containerWidth-buttonWidth)/2,90,buttonWidth,buttonHeight);
         startButton.addActionListener(this);
         this.add(startButton);
         
         exitButton = new JButton(EXIT_TEXT);
-        exitButton.setBounds((containerWidth-buttonWidth)/2,170,buttonWidth,buttonHeight);
+        exitButton.setBounds((containerWidth-buttonWidth)/2,130,buttonWidth,buttonHeight);
         exitButton.addActionListener(this);
         this.add(exitButton);
         
-        instructionButton = new JButton(INSTRUCTION_TEXT);
-        instructionButton.setBounds((containerWidth-buttonWidth)/2,210,buttonWidth,buttonHeight);
+        instructionButton = new JButton(INSTRUCTIONS_TEXT);
+        instructionButton.setBounds((containerWidth-buttonWidth)/2,170,buttonWidth,buttonHeight);
         instructionButton.addActionListener(this);
         this.add(instructionButton);
-    }
+        
+        highScoresButton = new JButton(HIGHSCORES_TEXT);
+        highScoresButton.setBounds((containerWidth-buttonWidth)/2,210,buttonWidth,buttonHeight);
+        highScoresButton.addActionListener(this);
+        this.add(highScoresButton);
+        
+        
+        }
 
     
     public void paintComponent(Graphics g){
@@ -288,6 +298,10 @@ public class HomeMenu extends JComponent implements /*MouseListener, MouseMotion
 		
 		else if(e.getSource()==instructionButton) {
 			new InstructionFrame();
+		}
+		
+		else if(e.getSource()==highScoresButton) {
+			new HighScoresFrame();
 		}
 		
 	}
