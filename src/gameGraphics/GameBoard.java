@@ -323,6 +323,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             continueButtonRect.setLocation(x,y-continueButtonRect.height);
         }
 
+        
+        
         g2d.drawString(CONTINUE,x,y);
 
         y *= 2;
