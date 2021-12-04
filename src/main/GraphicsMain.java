@@ -29,7 +29,7 @@ public class GraphicsMain {
     	
         EventQueue.invokeLater(() -> new GameFrame().initialize());
     	
-    	//new GameFrame();
+    	
         
         
     }
