@@ -1,11 +1,12 @@
 package controllers;
 
-import gameGraphics.GameFrame;
-import gameGraphics.HighScoresFrame;
-import gameGraphics.HomeMenu;
-import gameGraphics.InstructionFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import views.GameFrame;
+import views.HighScoresFrame;
+import views.HomeMenu;
+import views.InstructionFrame;
 
 public class HomeMenuController {
 

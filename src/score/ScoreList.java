@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import gameGraphics.HighScoresFrame;
+import views.HighScoresFrame;
 
 public class ScoreList { // list of data
 

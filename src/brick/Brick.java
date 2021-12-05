@@ -34,7 +34,7 @@ abstract public class Brick  {
     //private static Random rnd;
 
     private String name;
-    Shape brickFace;
+    private Shape brickFace;
 
     private Color border;
     private Color inner;
@@ -161,6 +161,10 @@ abstract public class Brick  {
     public void impact(){
         strength--;
         broken = (strength == 0);
+    }
+    
+    public Shape getBrickFace() {
+    	return this.brickFace;
     }
 
 

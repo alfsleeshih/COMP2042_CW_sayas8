@@ -1,7 +1,7 @@
 package controllers;
 
-import debugGraphics.DebugConsole;
-import gameGraphics.GameBoard;
+import views.DebugConsole;
+import views.GameBoard;
 import wall.Wall;
 import java.awt.*;
 import java.awt.event.*;
@@ -25,10 +25,12 @@ public class GameBoardController {
 		this.wall = wall;
 		
 		this.gameBoard.addKeyL(new GameBoardListener());
+		this.gameBoard.addMouseL(new GameBoardListener());
+		this.gameBoard.addMouseMotionL(new GameBoardListener());
 		
 	}
 	
-	class GameBoardListener implements KeyListener, MouseListener{
+	class GameBoardListener implements KeyListener, MouseListener, MouseMotionListener{
 
 		@Override
 		public void keyTyped(KeyEvent e) {
@@ -90,7 +92,30 @@ public class GameBoardController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
+			
+			Point p = e.getPoint();
+			
+			if(!gameBoard.getShowPauseMenu()) {
+				return;
+			}
+			
+			else if(gameBoard.getContinueButtonRect().contains(p)) {
+				gameBoard.quitPauseMenu();
+				gameBoard.doRepaint();
+			}
+			
+			else if(gameBoard.getRestartButtonRect().contains(p)) {
+				gameBoard.setRestartMessage();
+				wall.ballReset();
+				wall.wallReset();
+				gameBoard.quitPauseMenu();
+				gameBoard.doRepaint();
+			}
+			
+			else if(gameBoard.getExitButtonRect().contains(p)) {
+				System.out.println("Goodbye " + System.getProperty("user.name"));
+				System.exit(0);
+			}
 			
 		}
 
@@ -115,6 +140,41 @@ public class GameBoardController {
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			
+			Point p = e.getPoint();
+			
+			if(gameBoard.getExitButtonRect() != null && gameBoard.getShowPauseMenu() == true) {
+				if (gameBoard.getExitButtonRect().contains(p) || gameBoard.getRestartButtonRect().contains(p) || gameBoard.getContinueButtonRect().contains(p)) {
+					gameBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+				else {
+					gameBoard.setCursor(Cursor.getDefaultCursor());
+				}
+			}
+			
+			/*
+			Point p = mouseEvent.getPoint();
+	        if(exitButtonRect != null && showPauseMenu) {
+	            if (exitButtonRect.contains(p) || continueButtonRect.contains(p) || restartButtonRect.contains(p))
+	                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	            else
+	                this.setCursor(Cursor.getDefaultCursor());
+	        }
+	        else{
+	            this.setCursor(Cursor.getDefaultCursor());
+	        }
+	        */
 			
 		}
 		

@@ -50,7 +50,7 @@ public class Crack {
     }
 
     protected void makeCrack(Point2D point, int direction){ 
-        Rectangle bounds = this.brick.brickFace.getBounds();
+        Rectangle bounds = this.brick.getBrickFace().getBounds();
         
         Point impact = new Point((int)point.getX(),(int)point.getY()); //impact point of the brick
         Point start = new Point();

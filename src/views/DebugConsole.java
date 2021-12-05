@@ -15,13 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package debugGraphics;
+package views;
 
 import javax.swing.*;
 
 import ball.Ball;
 import controllers.DebugConsoleController;
-import gameGraphics.GameBoard;
 import wall.Wall;
 
 import java.awt.*;

@@ -1,4 +1,4 @@
-package gameGraphics;
+package views;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

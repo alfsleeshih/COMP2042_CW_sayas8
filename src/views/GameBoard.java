@@ -15,14 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package gameGraphics;
+package views;
 
 import javax.swing.*;
 
 import ball.Ball;
 import brick.Brick;
 import controllers.GameBoardController;
-import debugGraphics.DebugConsole;
 import player.Player;
 import wall.Wall;
 
@@ -33,7 +32,7 @@ import java.io.FileNotFoundException;
 
 
 
-public class GameBoard extends JComponent implements /*KeyListener,*/MouseListener,MouseMotionListener {
+public class GameBoard extends JComponent /*implements KeyListener,MouseListener,MouseMotionListener*/ {
 
     private static final String CONTINUE = "Continue";
     private static final String RESTART = "Restart";
@@ -181,10 +180,7 @@ public class GameBoard extends JComponent implements /*KeyListener,*/MouseListen
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
         this.setFocusable(true);
         this.requestFocusInWindow();
-        //this.addKeyListener(this);
         
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
     }
 
     private void drawString(Graphics2D g2d, String text, int x, int y) {
@@ -199,11 +195,7 @@ public class GameBoard extends JComponent implements /*KeyListener,*/MouseListen
         clear(g2d);
 
         g2d.setColor(Color.blue);
-        //g2d.drawString(message,250,225);
         
-        //clear(g2d);
-        //g2d.setColor(Color.blue);
-        //g2d.drawString(message2,250,250);
         g2d.setFont(inGameFont);
         drawString(g2d, message, 260, 150);
         
@@ -222,12 +214,6 @@ public class GameBoard extends JComponent implements /*KeyListener,*/MouseListen
         Toolkit.getDefaultToolkit().sync();
     }
     
-    /*
-    private void drawString(Graphics2D g2d, String text, int x, int y) {
-        for (String line : text.split("\n"))
-            g.drawString(line, x, y += g2d.getFontMetrics().getHeight());
-    }
-    */
 
     private void clear(Graphics2D g2d){
         Color tmp = g2d.getColor();
@@ -351,119 +337,25 @@ public class GameBoard extends JComponent implements /*KeyListener,*/MouseListen
         g2d.setFont(tmpFont);
         g2d.setColor(tmpColor);
     }
-
-    /*
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
+    
+    public void addKeyL(KeyListener keyListener) {
+   
+    	this.addKeyListener(keyListener);
+    	 
     }
 
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
+    public void addMouseL(MouseListener mouseListener) {
     	
-        switch(keyEvent.getKeyCode()){
-            case KeyEvent.VK_A:
-                wall.getPlayer().moveLeft();
-                break;
-            case KeyEvent.VK_D:
-                wall.getPlayer().movRight();
-                break;
-            case KeyEvent.VK_ESCAPE:
-                showPauseMenu = !showPauseMenu;
-                repaint();
-                gameTimer.stop();
-                break;
-            case KeyEvent.VK_SPACE:
-                if(!showPauseMenu)
-                    if(gameTimer.isRunning())
-                        gameTimer.stop();
-                    else
-                        gameTimer.start();
-                break;
-            case KeyEvent.VK_F1:
-                if(keyEvent.isAltDown() && keyEvent.isShiftDown())
-                    debugConsole.setVisible(true);
-            default:
-                wall.getPlayer().stop();
-        }
+    	this.addMouseListener(mouseListener);
+    	
     }
     
-
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-        wall.getPlayer().stop();
-    }
-    */
-    
-    public void addKeyL(KeyListener a) {
+    public void addMouseMotionL (MouseMotionListener mouseMotionListener) {
     	
-    	addKeyListener(a);
-    	
+    	this.addMouseMotionListener(mouseMotionListener);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-    	/*
-        Point p = mouseEvent.getPoint();
-        if(!showPauseMenu)
-            return;
-        if(continueButtonRect.contains(p)){
-            showPauseMenu = false;
-            repaint();
-        }
-        else if(restartButtonRect.contains(p)){
-            message = "Restarting Game...";
-            wall.ballReset();
-            wall.wallReset();
-            showPauseMenu = false;
-            repaint();
-        }
-        else if(exitButtonRect.contains(p)){
-            System.exit(0);
-        }
-        */
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent mouseEvent) {
-        Point p = mouseEvent.getPoint();
-        if(exitButtonRect != null && showPauseMenu) {
-            if (exitButtonRect.contains(p) || continueButtonRect.contains(p) || restartButtonRect.contains(p))
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            else
-                this.setCursor(Cursor.getDefaultCursor());
-        }
-        else{
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-    }
-
-    public void onLostFocus(){
+   public void onLostFocus(){
         gameTimer.stop();
         message = "Focus Lost";
         repaint();
@@ -475,6 +367,10 @@ public class GameBoard extends JComponent implements /*KeyListener,*/MouseListen
     
     public void setShowPauseMenu() {
     	this.showPauseMenu = !this.showPauseMenu;
+    }
+    
+    public void quitPauseMenu() {
+    	this.showPauseMenu = false;
     }
     
     public void doRepaint() {
@@ -491,6 +387,22 @@ public class GameBoard extends JComponent implements /*KeyListener,*/MouseListen
     
     public Boolean isGameRunning() {
     	return this.gameTimer.isRunning();
+    }
+    
+    public Rectangle getContinueButtonRect() {
+    	return this.continueButtonRect;
+    }
+    
+    public Rectangle getRestartButtonRect() {
+    	return this.restartButtonRect;
+    }
+    
+    public Rectangle getExitButtonRect() {
+    	return this.exitButtonRect;
+    }
+    
+    public void setRestartMessage() {
+    	this.message = "Restarting Game...";
     }
 
 }

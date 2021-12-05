@@ -1,4 +1,4 @@
-package gameGraphics;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

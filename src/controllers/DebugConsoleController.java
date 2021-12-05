@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import debugGraphics.DebugPanel;
+import views.DebugPanel;
 
 public class DebugConsoleController {
 	
