@@ -1,4 +1,4 @@
-package debugGraphics;
+package controllers;
 
 import wall.Wall;
 import java.awt.event.ActionEvent;
@@ -6,23 +6,28 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import debugGraphics.DebugPanel;
+
 public class DebugConsoleController {
 	
-	DebugPanel view;
-	Wall model;
+	// view
+	DebugPanel debugPanel;
+	
+	// model
+	Wall wall;
 	
 	public DebugConsoleController(DebugPanel view, Wall model) {
 		
-		this.view = view;
-		this.model = model;
+		this.debugPanel = view;
+		this.wall = model;
 		
-		this.view.addSkipLevelListener(new SkipLevelListener());
+		this.debugPanel.addSkipLevelListener(new SkipLevelListener());
 		
-		this.view.addResetBallsListener(new ResetBallsListener());
+		this.debugPanel.addResetBallsListener(new ResetBallsListener());
 		
-		this.view.addBallXSpeedListener(new BallXSpeedListener());
+		this.debugPanel.addBallXSpeedListener(new BallXSpeedListener());
 		
-		this.view.addBallYSpeedListener(new BallYSpeedListener());
+		this.debugPanel.addBallYSpeedListener(new BallYSpeedListener());
 		
 	}
 	
@@ -30,7 +35,7 @@ public class DebugConsoleController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.nextLevel();
+			wall.nextLevel();
 			
 		}
 	}
@@ -39,7 +44,7 @@ public class DebugConsoleController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.resetBallCount();
+			wall.resetBallCount();
 			
 		}
 		
@@ -49,7 +54,7 @@ public class DebugConsoleController {
 
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			model.setBallXSpeed(view.getBallXSpeedSlider().getValue());
+			wall.setBallXSpeed(debugPanel.getBallXSpeedSlider().getValue());
 			
 		}
 		
@@ -59,7 +64,7 @@ public class DebugConsoleController {
 
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			model.setBallYSpeed(view.getBallYSpeedSlider().getValue());
+			wall.setBallYSpeed(debugPanel.getBallYSpeedSlider().getValue());
 			
 		}
 		

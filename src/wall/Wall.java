@@ -36,9 +36,9 @@ import brick.CementBrick;
 import brick.ClayBrick;
 import brick.Crack;
 import brick.SteelBrick;
-import data.ScoreList;
-import data.Score;
 import player.Player;
+import score.Score;
+import score.ScoreList;
 
 
 public class Wall {

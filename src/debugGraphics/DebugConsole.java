@@ -20,6 +20,7 @@ package debugGraphics;
 import javax.swing.*;
 
 import ball.Ball;
+import controllers.DebugConsoleController;
 import gameGraphics.GameBoard;
 import wall.Wall;
 
@@ -36,7 +37,7 @@ public class DebugConsole extends JDialog implements WindowListener{
     private DebugPanel debugPanel;
     private GameBoard gameBoard;
     private Wall wall;
-    DebugConsoleController debugConsoleController;
+    private DebugConsoleController debugConsoleController;
 
 
     public DebugConsole(JFrame owner,Wall wall,GameBoard gameBoard){
@@ -46,7 +47,7 @@ public class DebugConsole extends JDialog implements WindowListener{
         this.gameBoard = gameBoard;
         initialize();
 
-        debugPanel = new DebugPanel(wall);
+        debugPanel = new DebugPanel();
         this.add(debugPanel,BorderLayout.CENTER);
 
         this.debugConsoleController = new DebugConsoleController(debugPanel, wall);

@@ -19,6 +19,8 @@ package gameGraphics;
 
 import javax.swing.*;
 
+import controllers.HomeMenuController;
+
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowEvent;
@@ -32,6 +34,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private GameBoard gameBoard;
     private HomeMenu homeMenu;
+    private HomeMenuController homeMenuController;
 
     private boolean gaming;
 
@@ -44,7 +47,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
         gameBoard = new GameBoard(this);
         
-        homeMenu = new HomeMenu(this,new Dimension(450,250)); // original dimension was (450,300)
+        homeMenu = new HomeMenu(new Dimension(450,250)); 
+        
+        homeMenuController = new HomeMenuController(homeMenu, this);
 
         this.add(homeMenu,BorderLayout.CENTER);
         
@@ -69,7 +74,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     }
     
 
-    public void enableGamexitButtonoard(){
+    public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
         this.add(gameBoard,BorderLayout.CENTER);

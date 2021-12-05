@@ -1,4 +1,4 @@
-package data;
+package score;
 
 import java.io.BufferedWriter;
 import java.io.File;

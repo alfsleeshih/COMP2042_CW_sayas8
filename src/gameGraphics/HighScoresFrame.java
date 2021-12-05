@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 
-import data.ScoreList;
+import score.ScoreList;
 
 public class HighScoresFrame extends JFrame implements ActionListener {
 	final int frameWidth = 300;
