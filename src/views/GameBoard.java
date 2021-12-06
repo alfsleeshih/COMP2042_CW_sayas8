@@ -1,20 +1,3 @@
-/*
- *  Brick Destroy - A simple Arcade video game
- *   Copyright (C) 2017  Filippo Ranza
- *
- *  This program is free software: you can redistrinstructionButtonute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distrinstructionButtonuted in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package views;
 
 import javax.swing.*;
@@ -30,8 +13,15 @@ import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 import java.io.FileNotFoundException;
 
-
-
+/**
+ * This class represents the game board.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ * 
+ */
 public class GameBoard extends JComponent /*implements KeyListener,MouseListener,MouseMotionListener*/ {
 
     private static final String CONTINUE = "Continue";
@@ -65,9 +55,11 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
     private Rectangle restartButtonRect;
     private int strLen;
 
-    //private DebugConsole debugConsole;
-
-
+    /**
+     * This is the constructor method of class GameBoard, it initializes the game board.
+     * 
+     * @param owner  the frame of the game
+     */
     public GameBoard(JFrame owner){
         super();
         
@@ -116,6 +108,7 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
                 if(wall.ballEnd()){
                 	
                     wall.wallReset();
+                    wall.getScoreList().checkBreakHighScore();
                     wall.getScoreList().breakHighScoreNotify();
                     try {
 						wall.getScoreList().sortData();
@@ -151,6 +144,11 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
 
     }
     
+    /**
+     * This method checks if there is at least one high score available in the high scores list.
+     * 
+     * @return  0, if there is no high scores in the high scores list, else, return the highest score in the high scores list
+     */
     private int checkHighScoreAvailable() {
     	if (wall.getScoreList().getHighScore().getScore() == 0) {
     		return 0;
@@ -161,6 +159,11 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
     	}
     }
     
+    /**
+     * This method checks if there is at least one high score available in the high scores list.
+     * 
+     * @return  "N/A", if there is no high scores in the high scores list, else, return the time stamp of the highest score in the high scores list
+     */
     private String checkTimeStampAvailable() {
     	
     	String na = "N/A";
@@ -174,8 +177,9 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
     	}
     }
 
-
-
+    /**
+     * This method initializes the frame of the game board.
+     */
     private void initialize(){
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
         this.setFocusable(true);
@@ -183,6 +187,14 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         
     }
 
+    /**
+     * This method splits the string into lines, and draw the string.
+     * 
+     * @param g2d  the graphics of the text
+     * @param text  the string
+     * @param x  the x coordination of the text
+     * @param y  the y coordination of the text
+     */
     private void drawString(Graphics2D g2d, String text, int x, int y) {
         for (String line : text.split("\n"))
             g2d.drawString(line, x, y += g2d.getFontMetrics().getHeight());
@@ -214,7 +226,11 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         Toolkit.getDefaultToolkit().sync();
     }
     
-
+    /**
+     * This method clears the interface of the game board.
+     * 
+     * @param g2d  the graphics of the background
+     */
     private void clear(Graphics2D g2d){
         Color tmp = g2d.getColor();
         g2d.setColor(BG_COLOR);
@@ -222,6 +238,12 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         g2d.setColor(tmp);
     }
 
+    /**
+     * this method draws the brick.
+     * 
+     * @param brick  the brick
+     * @param g2d  the graphics of the brick
+     */
     private void drawBrick(Brick brick,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -235,6 +257,12 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         g2d.setColor(tmp);
     }
 
+    /**
+     * This method draws the ball.
+     * 
+     * @param ball  the ball
+     * @param g2d  the graphics of the ball
+     */
     private void drawBall(Ball ball,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -249,6 +277,12 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         g2d.setColor(tmp);
     }
 
+    /**
+     * This method draws the player.
+     * 
+     * @param p  the player
+     * @param g2d  the graphics of the player
+     */
     private void drawPlayer(Player p,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -262,11 +296,21 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         g2d.setColor(tmp);
     }
 
+    /**
+     * This method opens up the pause menu of the game board.
+     * 
+     * @param g2d  the graphics of the game board
+     */
     private void drawMenu(Graphics2D g2d){
         obscureGameBoard(g2d);
         drawPauseMenu(g2d);
     }
 
+    /**
+     * This method obscures the game board.
+     * 
+     * @param g2d  the graphics of the game board
+     */
     private void obscureGameBoard(Graphics2D g2d){
 
         Composite tmp = g2d.getComposite();
@@ -282,6 +326,11 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         g2d.setColor(tmpColor);
     }
 
+    /**
+     * This method draws the pause menu of the game board.
+     * 
+     * @param g2d  the graphics of the pause menu
+     */
     private void drawPauseMenu(Graphics2D g2d){
         Font tmpFont = g2d.getFont();
         Color tmpColor = g2d.getColor();
@@ -338,69 +387,130 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         g2d.setColor(tmpColor);
     }
     
+    /**
+     * This method adds key listeners to class GameBoard.
+     * 
+     * @param keyListener  the class that implements the key listener
+     */
     public void addKeyL(KeyListener keyListener) {
    
     	this.addKeyListener(keyListener);
     	 
     }
 
+    /**
+     * This method adds mouse listener to class GameBoard.
+     * 
+     * @param mouseListener  the class that implements the mouse listener
+     */
     public void addMouseL(MouseListener mouseListener) {
     	
     	this.addMouseListener(mouseListener);
     	
     }
     
+    /**
+     * This method adds mouse motion listener to class GameBoard.
+     * 
+     * @param mouseMotionListener  the class that implements the mouse motion listener
+     */
     public void addMouseMotionL (MouseMotionListener mouseMotionListener) {
     	
     	this.addMouseMotionListener(mouseMotionListener);
     }
 
-   public void onLostFocus(){
+    /**
+     * This method stops the running of the game, and displays 'Focus Lost'.
+     */
+    public void onLostFocus(){
         gameTimer.stop();
         message = "Focus Lost";
         repaint();
     }
     
+    /**
+     * This method checks if the pause menu is showed.
+     * 
+     * @return  true if the pause menu is showed, false otherwise
+     */
     public boolean getShowPauseMenu() {
     	return this.showPauseMenu;
     }
     
+    /**
+     * This method shows the pause menu or hides the pause menu.
+     */
     public void setShowPauseMenu() {
     	this.showPauseMenu = !this.showPauseMenu;
     }
     
+    /**
+     * This method hides the pause menu of the game board.
+     */
     public void quitPauseMenu() {
     	this.showPauseMenu = false;
     }
     
+    /**
+     * This method performs repaint to class GameBoard.
+     */
     public void doRepaint() {
     	this.repaint();
     }
     
+    /**
+     * This method stops the running of the game.
+     */
     public void stopGameTimer() {
     	this.gameTimer.stop();
     }
     
+    /**
+     * This method starts the running of the game.
+     */
     public void startGameTimer() {
     	this.gameTimer.start();
     }
     
+    /**
+     * This method checks the running of the game.
+     * 
+     * @return  true if the game is running, false otherwise
+     */
     public Boolean isGameRunning() {
     	return this.gameTimer.isRunning();
     }
     
+    /**
+     * This method returns the 'continue' button.
+     * 
+     * @return  the 'continue' button
+     */
     public Rectangle getContinueButtonRect() {
     	return this.continueButtonRect;
     }
     
+    /**
+     * This method returns the 'restart' button.
+     * 
+     * @return  the 'restart' button
+     */
     public Rectangle getRestartButtonRect() {
     	return this.restartButtonRect;
     }
     
+    /**
+     * This method returns the 'exit' button.
+     * 
+     * @return  the 'exit' button
+     */
     public Rectangle getExitButtonRect() {
     	return this.exitButtonRect;
     }
     
+    /**
+     * This method sets the restarting message.
+     */
     public void setRestartMessage() {
     	this.message = "Restarting Game...";
     }

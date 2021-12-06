@@ -17,6 +17,15 @@ import javax.swing.border.TitledBorder;
 
 import score.ScoreList;
 
+/**
+ * This class represents the frame of the high score list in the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class HighScoresFrame extends JFrame implements ActionListener {
 	final int frameWidth = 300;
 	final int frameHeight = 200;
@@ -31,6 +40,9 @@ public class HighScoresFrame extends JFrame implements ActionListener {
 	JButton okButton;
 	JScrollPane jps;
 
+	/**
+	 * This is the constructor method of class HighScoreFrame, it initializes the frame and the panel of the high scores frame, and creates a 'OK' button.
+	 */
 	public HighScoresFrame() {
 		
 		scoreList = new ScoreList();
@@ -43,9 +55,11 @@ public class HighScoresFrame extends JFrame implements ActionListener {
 		
 		initFrame();
 		
-		
 	}
 
+	/**
+	 * This method initializes the frame of the high scores list.
+	 */
 	public void initFrame() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(frameWidth, frameHeight);
@@ -57,6 +71,9 @@ public class HighScoresFrame extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * This method initializes the panel of the high scores list, and creates a high scores rank table.
+	 */
 	public void initPanel() {
 		instructionPanel = new JPanel();
 
@@ -69,18 +86,13 @@ public class HighScoresFrame extends JFrame implements ActionListener {
 		instructionPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "HIGHSCORES",
 				TitledBorder.CENTER, TitledBorder.TOP));
 		
-		//scoreList.printRank();
 		
+		for ( int i=0 ;i<scoreList.getHighScoresList().size()-1 ;i++ ) {
 		
-		
-		for ( int i=0 ;i<scoreList.getData().size()-1 ;i++ ) {
-		//for ( int i=0 ;i<5 ;i++ ) {
-			 this.scores.add(scoreList.getData().get(i).getScore());
-			 this.timeStamps.add(scoreList.getData().get(i).getFormattedTimeStamp());
+			 this.scores.add(scoreList.getHighScoresList().get(i).getScore());
+			 this.timeStamps.add(scoreList.getHighScoresList().get(i).getFormattedTimeStamp());
 		}
 		
-		//System.out.println(scores);
-		//System.out.println(timeStamps);
 		
 		String[][] data = new String[5][2]; // 5 rows, 2 columns
 		
@@ -93,22 +105,18 @@ public class HighScoresFrame extends JFrame implements ActionListener {
 			
 			if (flag == 0) {
 				flag = 1;
-				for ( int j=0; j<scoreList.getData().size()-1; j++) { // j == number of rows
+				for ( int j=0; j<scoreList.getHighScoresList().size()-1; j++) { // j == number of rows
 					data[j][i] = String.valueOf(j+1);
 				}
 			}
 			
 			else if (flag == 1) {
 				flag = -1;
-				for ( int j=0; j<scoreList.getData().size()-1; j++) { // j == number of rows
+				for ( int j=0; j<scoreList.getHighScoresList().size()-1; j++) { // j == number of rows
 					data[j][i] = String.valueOf(scores.get(j)) + ", " + timeStamps.get(j);
 				}
 			}
 		}
-		
-		
-		
-		
 		
 		String[] header = { "Rank", "Score" };
 		JTable table = new JTable(data, header);
@@ -123,6 +131,9 @@ public class HighScoresFrame extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * This method creates an 'OK' button.
+	 */
 	public void createExitButtonutton() {
 
 		okButton = new JButton("OK");

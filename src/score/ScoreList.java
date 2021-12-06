@@ -17,57 +17,92 @@ import javax.swing.JOptionPane;
 
 import views.HighScoresFrame;
 
+/**
+ * This class represents a collection of scores in the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class ScoreList { // list of data
 
-	ArrayList<Score> data;
+	ArrayList<Score> highScoresList;
 	
 	Score liveScore;
 
-	
+	/**
+	 * This is the constructor method of class ScoreList, it initializes a live score, a high scores list by reading 'highscore.txt', and sort the high scores list in descending order.
+	 */
 	public ScoreList() {
 
-		data = new ArrayList<Score>();
+		highScoresList = new ArrayList<Score>();
 		
 		liveScore = new Score();
 
 		try {
 			sortData();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 	}
 
-
+	/**
+	 * This method checks the existence of 'highscore.txt', collects the data from the text file, and inserts it into the high score list in ascending order.
+	 * 
+	 * @throws FileNotFoundException  the exception if the 'highscore.txt' cannot be found
+	 */
 	public void sortData() throws FileNotFoundException {
 
 		File file = new File("highscore.txt");
 		
+		this.checkAndInitializeHighScoreFile(file);
+		
+		Scanner scanner;
+		try {
+			scanner = new Scanner(file);
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				String[] scoreAndDateTime = line.split(", ");
+
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm");
+
+				Score score = new Score();
+				
+				score.setScore(Integer.valueOf(scoreAndDateTime[0]));
+				score.setTimeStamp(LocalDateTime.parse(scoreAndDateTime[1], formatter));
+				
+				highScoresList.add(score);
+				
+			}
+			
+			Collections.sort(highScoresList, Collections.reverseOrder());
+
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This method check if 'highscore.txt' exists, if it does not exists, create a new 'highscore.txt' and write a default high score to the new text file.
+	 * 
+	 * @param file  the 'highscore.txt' file
+	 */
+	public void checkAndInitializeHighScoreFile(File file) {
+				
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
 						
 			} catch (IOException e) {
-				//System.out.println("hi");
 				e.printStackTrace();
 			}
-			
-			//FileWriter writeFile = null;
-			//BufferedWriter writer = null;
 			
 			String defaultHighScore = "0, 21-01-01 00:00" + "\n" ;
-			/*
-			try {
-				FileWriter writer = new FileWriter(file);
-				writer.write(defaultHighScore);
-				writer.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
 			
 			FileWriter writeFile = null;
 			BufferedWriter writer = null;
@@ -80,67 +115,18 @@ public class ScoreList { // list of data
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-		}
-		
-		
-
-		Scanner scanner;
-		try {
-			scanner = new Scanner(file);
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				String[] scoreAndDateTime = line.split(", ");
-
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm");
-
-				// data.add(new Score(Integer.valueOf(scoreAndDateTime[0]),
-						// LocalDateTime.parse(scoreAndDateTime[1], formatter)));
-				
-				Score score = new Score();
-				
-				score.setScore(Integer.valueOf(scoreAndDateTime[0]));
-				score.setTimeStamp(LocalDateTime.parse(scoreAndDateTime[1], formatter));
-				
-				data.add(score);
-				
-				
-
-			}
-			
-			Collections.sort(data, Collections.reverseOrder());
-
-			// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm");
-			//System.out.println(data);
-			// System.out.println(data.get(0).getTimeStamp1().format(formatter));
-			// System.out.println(((ChronoLocalDateTime<LocalDate>)
-			// data).format(formatter));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 	
-	
+	/**
+	 * This method checks if the live score is supposed to be added into the high scores list, if yes, writes the live score and the time stamp of the live score into the high scores list.
+	 * 
+	 * @see boolean Score.ScoreList.checkBreakHighScores()
+	 * @see boolean Score.ScoreList.checkNotEqualHighScores()
+	 */
 	public void checkBreakHighScore() {
-
-		/*
-		if (highScore.equals("")) {
-			return;
-		}
-		*/
-
-		//if (this.getLiveScore().getScore() > this.getHighScore().getScore()) {
-			
-			//System.out.println(checkBreakHighScores());
 		
 		if(checkBreakHighScores()) {
-			
-			//timeStamp = LocalDateTime.now();
-			
-			//highScore = score + " : " + this.getFormattedTimeStamp();
 			
 			liveScore.setTimeStamp(LocalDateTime.now());
 			
@@ -151,26 +137,17 @@ public class ScoreList { // list of data
 				try {
 					highScoreFile.createNewFile();
 				} catch (IOException e) {
-					//System.out.println("New file created.");
+					
 					e.printStackTrace();
 				}
 			}
 
 			FileWriter writeFile = null;
 			BufferedWriter writer = null;
-
+			
 			try {
 				writeFile = new FileWriter(highScoreFile, true);
 				writer = new BufferedWriter(writeFile);
-				//writer.write(newHighScore);
-				/*
-				if (highScoreFile.exists()) {
-					writer.append(newHighScore);
-				}
-				else {
-					writer.write(newHighScore);
-				}
-				*/
 				
 				writer.append(newHighScore);
 			}
@@ -189,79 +166,86 @@ public class ScoreList { // list of data
 			}
 		}
 	}
-
-	public ArrayList<Score> getData() {
-		return this.data;
-	}
-
-	public Score getHighScore() {
-		return this.data.get(0);
-	}
 	
-	public Score getLiveScore() {
-		return liveScore;
-	}
-	
-	public void printRank() {
-		System.out.println(data);
-	}
-	
+	/**
+	 * This method checks if the live score is supposed to be added into the high score list.
+	 * 
+	 * @return  true if live score is larger than the highest score in the high scores list or larger and not equal to any high scores in the high scores list
+	 */
 	public boolean checkBreakHighScores() {
-		//if (this.liveScore > this.data.getScores())
 		
-		//System.out.println(this.data.get(0).getScore());
-		//System.out.println(this.liveScore.getScore() > this.data.get(0).getScore());
-		
-		/*
-		if (this.liveScore.getScore() > this.data.get(0).getScore()) { // higher than first
-			return true;
-		}
-		*/
-		
-		//return (this.liveScore.getScore() > this.data.get(0).getScore());
+		for (int i=0; i<this.highScoresList.size()-1; i++) {
 			
-		
-		for (int i=0; i<this.data.size()-1; i++) {
-			
-			//System.out.println("check");
-			
-			if ((this.liveScore.getScore() > this.data.get(i+1).getScore() &&  // eliminate the default
-					this.liveScore.getScore() < this.data.get(0).getScore()) && // lower than first
-						checkNotEqualHighScores())
-						//checkEqualHighScores(this.liveScore.getScore(), this.data.get)) 
+			if ((this.liveScore.getScore() > this.highScoresList.get(i+1).getScore() &&  // eliminate the default
+					this.liveScore.getScore() < this.highScoresList.get(0).getScore()) && // lower than first
+						checkNotEqualHighScores()) // not equal to any of the high score
 				return true;
 			}
 		
-		return (this.liveScore.getScore() > this.data.get(0).getScore());
+		return (this.liveScore.getScore() > this.highScoresList.get(0).getScore());
 		
 		
 	}
-			
-		
-		
-		
-		//else return false;
-		//return false;
 	
-	
+	/**
+	 * This method returns true if the live score is not equal to any high scores in the high scores list.
+	 * 
+	 * @return  true if the live score is not equal to any high scores in the high scores list.
+	 */
 	public boolean checkNotEqualHighScores() {
 		
 		boolean flag = false;
 		
-		for (int i=0; i<this.data.size(); i++) {
-			if (this.liveScore.getScore() != this.data.get(i).getScore())
+		for (int i=0; i<this.highScoresList.size(); i++) {
+			if (this.liveScore.getScore() != this.highScoresList.get(i).getScore())
 				flag = true;
 		}
 		
-		//System.out.println(flag);
 		return flag;
 	}
 	
+	/**
+	 * This method checks if a new high score is created, if so, create a JDialog to congratulate the player.
+	 */
 	public void breakHighScoreNotify() {
-		if (this.liveScore.getScore() > this.data.get(0).getScore()) {
+		if (this.liveScore.getScore() > this.highScoresList.get(0).getScore()) {
 			new HighScoresFrame();
-			JOptionPane.showMessageDialog(null, "Congluatulations! You just break a new highscore.", null, JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Congratulations! You just break a new highscore.", null, JOptionPane.INFORMATION_MESSAGE);
 		}
+	}
+	
+	/**
+	 * This method returns the high scores list.
+	 * 
+	 * @return  the high scores list
+	 */
+	public ArrayList<Score> getHighScoresList() {
+		return this.highScoresList;
+	}
+
+	/**
+	 * This method returns the highest score in the high scores list.
+	 * 
+	 * @return  the highest score in the high scores list
+	 */
+	public Score getHighScore() {
+		return this.highScoresList.get(0);
+	}
+	
+	/**
+	 * This method returns the live score of the player.
+	 * 
+	 * @return  the live score of the player
+	 */
+	public Score getLiveScore() {
+		return liveScore;
+	}
+	
+	/**
+	 * This method prints the high score list
+	 */
+	public void printRank() {
+		System.out.println(highScoresList);
 	}
 	
 	

@@ -7,6 +7,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class represents the frame of the 'instructions' pop up.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class InstructionFrame extends JFrame implements ActionListener {
 	
 	final int frameWidth = 300;
@@ -19,6 +28,9 @@ public class InstructionFrame extends JFrame implements ActionListener {
 	JButton okButton;
 	JScrollPane jps;
 	
+	/**
+	 * This is the constructor method of class InstructionsFrame, it initializes the frame and the panel of the 'instructions' pop up, and creates an 'OK' button.
+	 */
 	public InstructionFrame() {
 		
 		createExitButtonutton();
@@ -30,6 +42,9 @@ public class InstructionFrame extends JFrame implements ActionListener {
 		
 	}
 	
+	/**
+	 * This method initializes the frame of the 'instructions' pop up.
+	 */
 	public void initFrame() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(frameWidth,frameHeight);
@@ -41,6 +56,9 @@ public class InstructionFrame extends JFrame implements ActionListener {
 		
 	}
 	
+	/**
+	 * This method initializes the panel of the 'instructions' pop up, and creates a table containing the information of 'instructions'.
+	 */
 	public void initPanel() {
 		instructionPanel = new JPanel();
 		
@@ -77,9 +95,9 @@ public class InstructionFrame extends JFrame implements ActionListener {
 		
 	}
 	
-	
-	
-	
+	/**
+	 * This method creates an 'OK' button.
+	 */
 	public void createExitButtonutton() {
 		
 		okButton = new JButton("OK");

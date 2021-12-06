@@ -163,6 +163,11 @@ abstract public class Brick  {
         broken = (strength == 0);
     }
     
+    /**
+     * This method returns the border shape of the brick.
+     * 
+     * @return  border shape of the brick
+     */
     public Shape getBrickFace() {
     	return this.brickFace;
     }

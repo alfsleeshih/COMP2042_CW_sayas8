@@ -26,7 +26,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * This class represents the panel of the debug console.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class DebugPanel extends JPanel {
 
 	private static final Color DEF_BKG = Color.black;
@@ -39,17 +47,11 @@ public class DebugPanel extends JPanel {
 
 	//private Wall wall;
 
+	/**
+	 * This is a constructor method of class DebugPanel, it creates the 'skip level' and 'reset ball' button, and sliders to set the movement speed of the ball.
+	 */
 	public DebugPanel() {
-
-		//this.wall = wall;
-
 		initialize();
-
-		// skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
-		// resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
-
-		// ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));
-		// ballYSpeed = makeSlider(-4,4,e -> wall.setBallYSpeed(ballYSpeed.getValue()));
 
 		skipLevelButton = new JButton("SKIP LEVEL");
 		resetBallsButton = new JButton("RESET BALLS");
@@ -65,28 +67,21 @@ public class DebugPanel extends JPanel {
 
 	}
 
+	/**
+	 * This method initializes the debug panel by setting its background colour and layout.
+	 */
 	private void initialize() {
 		this.setBackground(DEF_BKG);
 		this.setLayout(new GridLayout(2, 2));
 	}
 
-	/*
-	private JButton makeButton(String title, ActionListener e) {
-		JButton out = new JButton(title);
-		out.addActionListener(e);
-		return out;
-	}
-
-	private JSlider makeSlider(int min, int max, ChangeListener e) {
-		JSlider out = new JSlider(min, max);
-		out.setMajorTickSpacing(1);
-		out.setSnapToTicks(true);
-		out.setPaintTicks(true);
-		out.addChangeListener(e);
-		return out;
-	}
-	*/
-
+	/**
+	 * This method initializes JSlider.
+	 * 
+	 * @param min  the minimum value of the slider
+	 * @param max  the maximum value of the slider
+	 * @return  the JSlider
+	 */
 	private JSlider initSlider(int min, int max) {
 		JSlider out = new JSlider(min, max);
 		out.setMajorTickSpacing(1);
@@ -95,29 +90,55 @@ public class DebugPanel extends JPanel {
 		return out;
 	}
 
+	/**
+	 * this method sets the movement speed of the ball via the slider.
+	 * 
+	 * @param x  the horizontal movement speed of the ball
+	 * @param y  the vertical movement speed of the ball
+	 */
 	public void setValues(int x, int y) {
 		ballXSpeedSlider.setValue(x);
 		ballYSpeedSlider.setValue(y);
 	}
-
+	
+	/**
+	 * This method adds action listener to the 'skip level' button of the debug panel.
+	 * 
+	 * @param listenForSkipLevelButton  the class that implements the action listener
+	 */
 	public void addSkipLevelListener(ActionListener listenForSkipLevelButton) {
 
 		skipLevelButton.addActionListener(listenForSkipLevelButton);
 
 	}
 
+	/**
+	 * This method adds action listener to the 'reset balls' button of the debug panel.
+	 * 
+	 * @param listenForSkipLevelButton  the class that implements the action listener
+	 */
 	public void addResetBallsListener(ActionListener listenForResetBallsButton) {
 
 		resetBallsButton.addActionListener(listenForResetBallsButton);
 
 	}
 
+	/**
+	 * This method adds change listener to the BallXSpeed slider.
+	 * 
+	 * @param listenForSkipLevelButton  the class that implements the change listener
+	 */
 	public void addBallXSpeedListener(ChangeListener listenForBallXSpeedSlider) {
 
 		ballXSpeedSlider.addChangeListener(listenForBallXSpeedSlider);
 
 	}
 
+	/**
+	 * This method adds change listener to the BallYSpeed slider.
+	 * 
+	 * @param listenForSkipLevelButton  the class that implements the change listener
+	 */
 	public void addBallYSpeedListener(ChangeListener listenForBallYSpeedSlider) {
 
 		ballYSpeedSlider.addChangeListener(listenForBallYSpeedSlider);
@@ -125,10 +146,20 @@ public class DebugPanel extends JPanel {
 
 	}
 	
+	/**
+	 * This method returns the slider that controls the horizontal movement speed of the ball.
+	 * 
+	 * @return  the slider that controls the horizontal movement speed of the ball
+	 */
 	public JSlider getBallXSpeedSlider() {
 		return this.ballXSpeedSlider;
 	}
 	
+	/**
+	 * This method returns the slider that controls the vertical movement speed of the ball.
+	 * 
+	 * @return  the slider that controls the vertical movement speed of the ball
+	 */
 	public JSlider getBallYSpeedSlider() {
 		return this.ballYSpeedSlider;
 	}

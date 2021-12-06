@@ -11,19 +11,88 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.JOptionPane;
 
+
+/**
+ * This class represents the score in the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class Score implements Comparable<Score> {
-	//private int score;
-	//private String highScore;
-	//private LocalDateTime timeStamp;
 	
-	//temp
 	private int score;
 	private LocalDateTime timeStamp;
 	
+	/**
+	 * This is the constructor method of class Score, it initializes the score of the player.
+	 */
+	public Score() {
+		this.score = 0;
+		
+	}
 	
-	
+	/**
+	 * This method returns the score of the player.
+	 * 
+	 * @return  the score of the player
+	 */
 	public int getScore() {
 		return score;
+	}
+	
+	/**
+	 * This method returns the time stamp of the score played by the player.
+	 * 
+	 * @return  the time stamp of the score played by the player
+	 */
+	public LocalDateTime getTimeStamp() {
+		return timeStamp;
+	}
+	
+	/**
+	 * This method format the time stamp of the score played by the player to a pattern of "yy-MM-dd HH:mm".
+	 * 
+	 * @return  the formatted time stamp of then score played by the player.
+	 */
+	public String getFormattedTimeStamp() {
+		return timeStamp.format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm"));
+	}
+	
+	/**
+	 * This method increases the score.
+	 * 
+	 * @param scoreIncreased  the value to be increased to the score
+	 */
+	public void increaseScore(int scoreIncreased) {
+		this.score += scoreIncreased;
+	}
+	
+	/**
+	 * This method resets the score.
+	 */
+	public void resetScore() {
+		this.score = 0;
+	}
+
+	/**
+	 * This method sets the score.
+	 * 
+	 * @param score  the value to be set to the score
+	 */
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	/**
+	 * This method sets the time stamp of the score played by the player.
+	 * 
+	 * @param timeStamp  the time stamp value to be set to the time stamp of the score played by the player
+	 */
+	public void setTimeStamp(LocalDateTime timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	
 	@Override
@@ -31,127 +100,11 @@ public class Score implements Comparable<Score> {
 		return score + ", " + timeStamp + "\n";		
 	}
 	
-	public Score() {
-		this.score = 0;
-		
-	}
-	
-	public LocalDateTime getTimeStamp1() {
-		return timeStamp;
-	}
-	
-	public String getFormattedTimeStamp() {
-		return timeStamp.format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm"));
-	}
-	
-	public void increaseScore(int scoreIncreased) {
-		this.score += scoreIncreased;
-	}
-	
-	public void resetScore() {
-		this.score = 0;
-	}
-
-	
 	@Override
 	public int compareTo(Score o) {
 		int scoreRank = score - o.getScore() ;
 		return scoreRank;
 	}
-	
-	public void setScore(int score) {
-		this.score = score;
-	}
-	
-	public void setTimeStamp(LocalDateTime timeStamp) {
-		this.timeStamp = timeStamp;
-	}
-
-	/*
-	public String getHighScore() { // format: Alf:560
-
-		FileReader readFile = null;
-		BufferedReader reader = null;
-
-		try {
-			readFile = new FileReader("highscore.dat");
-			reader = new BufferedReader(readFile);
-			return reader.readLine();
-		}
-
-		catch (Exception e) {
-			return "0"; // if we cannot create the dat file
-		}
-
-		finally {
-			try {
-				if (reader != null)
-					reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
-	
-	
-
-	public void checkBreakHighScore() {
-
-		if (highScore.equals("")) {
-			return;
-		} 
-
-		else if (score > Integer.parseInt(highScore.split(" : ")[0])) {
-			//String name = JOptionPane.showInputDialog("What is your name?");
-			//highScore = name + ":" + score;
-		//if (score > Integer.parseInt(highScore)) {
-			
-			//highScore = String.valueOf(score);
-			
-			timeStamp = LocalDateTime.now();
-			
-			highScore = score + " : " + this.getFormattedTimeStamp();
-
-			File highScoreFile = new File("highscore.dat");
-			if (!highScoreFile.exists()) {
-				try {
-					highScoreFile.createNewFile();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-			FileWriter writeFile = null;
-			BufferedWriter writer = null;
-
-			try {
-				writeFile = new FileWriter(highScoreFile);
-				writer = new BufferedWriter(writeFile);
-				writer.write(this.highScore);
-			}
-
-			catch (Exception e) {
-
-			}
-
-			finally {
-				try {
-					if (writer != null)
-						writer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
-	public int getScore() {
-		return this.score;
-	}
-	*/
-	
-	
 	
 
 }

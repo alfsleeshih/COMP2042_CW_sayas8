@@ -3,11 +3,22 @@ package controllers;
 import wall.Wall;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import views.DebugPanel;
 
+/**
+ * This class represents the controller between the debug consolea and the wall.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class DebugConsoleController {
 	
 	// view
@@ -16,10 +27,16 @@ public class DebugConsoleController {
 	// model
 	Wall wall;
 	
-	public DebugConsoleController(DebugPanel view, Wall model) {
+	/**
+	 * This is a constructor class of class DebugConsoleController, it adds the action listeners to the button of the debug console.
+	 *  
+	 * @param debugPanel  this is the view
+	 * @param wall this is the model
+	 */
+	public DebugConsoleController(DebugPanel debugPanel, Wall wall) {
 		
-		this.debugPanel = view;
-		this.wall = model;
+		this.debugPanel = debugPanel;
+		this.wall = wall;
 		
 		this.debugPanel.addSkipLevelListener(new SkipLevelListener());
 		
@@ -31,15 +48,30 @@ public class DebugConsoleController {
 		
 	}
 	
+	/**
+	 * This class implements the action listener for the 'skip level' button of the debug console.
+	 * 
+	 */
 	class SkipLevelListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			wall.nextLevel();
+			if(wall.hasLevel()) {
+				wall.nextLevel();
+				
+			}
+			
+			else {
+				JOptionPane.showMessageDialog(null, "Hang in there, this is the last level", null, JOptionPane.INFORMATION_MESSAGE);
+			}
 			
 		}
 	}
 	
+	/**
+	 * This class implements the action listener for the 'reset balls' button of the debug console.
+	 * 
+	 */
 	class ResetBallsListener implements ActionListener{
 
 		@Override
@@ -50,6 +82,10 @@ public class DebugConsoleController {
 		
 	}
 	
+	/**
+	 * This class implements the change listener for the slider of the horizontal movement speed of the ball.
+	 * 
+	 */
 	class BallXSpeedListener implements ChangeListener{
 
 		@Override
@@ -60,6 +96,10 @@ public class DebugConsoleController {
 		
 	}
 	
+	/**
+	 * This class implements the change listener for the slider of the vertical movement speed of the ball.
+	 * 
+	 */
 	class BallYSpeedListener implements ChangeListener{
 
 		@Override

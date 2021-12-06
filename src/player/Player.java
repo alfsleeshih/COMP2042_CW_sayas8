@@ -23,6 +23,15 @@ import java.awt.geom.Rectangle2D;
 
 import ball.Ball;
 
+/**
+ * This class represents the paddle in the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 
 public class Player {
 
@@ -38,7 +47,14 @@ public class Player {
     private int min;
     private int max;
 
-
+    /**
+     * This is a constructor method of class Player, it initializes the border shape of the player, the leftmost and rightmost coordination it could moved. 
+     * 
+     * @param ballPoint  the coordination of the ball
+     * @param width  the width of the player
+     * @param height  the height of the player
+     * @param container  the border shape of the container
+     */
     public Player(Point ballPoint,int width,int height,Rectangle container) {
         this.ballPoint = ballPoint;
         moveAmount = 0;
@@ -48,15 +64,31 @@ public class Player {
 
     }
 
+    /**
+     * This method creates a rectangular shape according to the passed in width parameter and height paramater.
+     * 
+     * @param width  the width of the rectangle
+     * @param height  the height of the rectangle
+     * @return  the rectangular shape according to the passed in width parameter and height paramater
+     */
     private Rectangle makeRectangle(int width,int height){
         Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));
     }
 
+    /**
+     * This method checks if the player has contacted with the ball.
+     * 
+     * @param b  the ball
+     * @return  true if the player has contacted with the ball, else false
+     */
     public boolean impact(Ball b){
         return playerFace.contains(b.getPosition()) && playerFace.contains(b.getDown()) ;
     }
 
+    /**
+     * This method moves the player with a restriction of its leftmost coordination and rightmost coordination.
+     */
     public void move(){
         double x = ballPoint.getX() + moveAmount;
         if(x < min || x > max)
@@ -65,27 +97,51 @@ public class Player {
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
 
+    /**
+     * This method moves the player to its left.
+     */
     public void moveLeft(){
         moveAmount = -DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * This method moves the player to its right.
+     */
     public void movRight(){
         moveAmount = DEF_MOVE_AMOUNT;
     }
 
+    /**
+     * This method stops the movement of the player.
+     */
     public void stop(){
         moveAmount = 0;
     }
 
+    /**
+     * This method returns the border shape of the player.
+     * 
+     * @return  the border shape of the player
+     */
     public Shape getPlayerFace(){
         return  playerFace;
     }
 
+    /**
+     * This method moves the player to the specified coordination.
+     * 
+     * @param p  the specified coordination for the player to move to
+     */
     public void moveTo(Point p){
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
     
+    /**
+     * This method sets the width of the player.
+     * 
+     * @param width  the width of the player
+     */
     public void setPlayerWidth(int width) {
     	this.playerFace = makeRectangle(width,10);
     }

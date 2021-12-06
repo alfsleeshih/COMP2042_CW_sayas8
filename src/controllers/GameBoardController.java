@@ -8,7 +8,15 @@ import java.awt.event.*;
 
 import javax.swing.JFrame;
 
-
+/**
+ * This class represents the controller between the game board and the wall.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class GameBoardController {
 	
 	// view
@@ -18,6 +26,13 @@ public class GameBoardController {
 	// model
 	Wall wall;
 	
+	/**
+	 * This is a constructor method of class GameBoardController, it adds the key listeners, mouse listeners and the mouse motion listeners to the game board.
+	 * 
+	 * @param gameFrame  this is the window frame of the view
+	 * @param gameBoard  this is the view
+	 * @param wall  this is the model
+	 */
 	public GameBoardController(JFrame gameFrame, GameBoard gameBoard, Wall wall) {
 		
 		this.gameBoard = gameBoard;
@@ -30,6 +45,10 @@ public class GameBoardController {
 		
 	}
 	
+	/**
+	 * This class implements the key listener, mouse listener, and the mouse motion listener for the game board.
+	 * 
+	 */
 	class GameBoardListener implements KeyListener, MouseListener, MouseMotionListener{
 
 		@Override
@@ -163,18 +182,6 @@ public class GameBoardController {
 				}
 			}
 			
-			/*
-			Point p = mouseEvent.getPoint();
-	        if(exitButtonRect != null && showPauseMenu) {
-	            if (exitButtonRect.contains(p) || continueButtonRect.contains(p) || restartButtonRect.contains(p))
-	                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	            else
-	                this.setCursor(Cursor.getDefaultCursor());
-	        }
-	        else{
-	            this.setCursor(Cursor.getDefaultCursor());
-	        }
-	        */
 			
 		}
 		

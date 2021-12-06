@@ -40,7 +40,15 @@ import player.Player;
 import score.Score;
 import score.ScoreList;
 
-
+/**
+ * This class represents a combination of class Brick, class Ball, and class Player. It is the main model class.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class Wall {
 
     private static final int LEVELS_COUNT = 4;
@@ -49,15 +57,11 @@ public class Wall {
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
 
-    private Random rnd;
     private Rectangle area;
 
     private Brick[] bricks;
     private Ball ball;
     private Player player;
-    //private int score;
-    //private String highScore;
-    //private Score score;
     ScoreList scoreList;
 
     private Brick[][] levels;
@@ -68,6 +72,15 @@ public class Wall {
     private int ballCount;
     private boolean ballLost;
 
+    /**
+     * This is a constructor method of class Wall, it initializes the score and the ball count, the starting position of the ball and the player.
+     * 
+     * @param drawArea  the dimension of the interface of the game
+     * @param brickCount  the number of bricks
+     * @param lineCount  the number of rows for the wall
+     * @param brickDimensionRatio  the ratio of the dimension of a single brick
+     * @param ballPos  the coordination of the ball
+     */
     public Wall(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
         this.startPoint = new Point(ballPos);
@@ -80,47 +93,19 @@ public class Wall {
         ballCount = 3;
         ballLost = false;
         
-        //score = 0;
-        //highScore = "NOBODY:0";
-        
-        /*
-        rnd = new Random();
-
-        
-        makeBall(ballPos);
-        
-        int speedX;
-        int speedY;
-        
-        
-        do{
-            speedX = rnd.nextInt(5) - 2; // -2 -1 1 2
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3); // 1 2
-        }while(speedY == 0);
-      
-        ball.setSpeed(speedX,speedY);
-        */
-        
-        
         player = new Player((Point) ballPos.clone(),150,10, drawArea);
         
         area = drawArea;
         
-        //score = new Score();
         scoreList = new ScoreList();
         
-        /*
-        if(highScore.equals("")) {
-        	highScore = this.getHighScore();
-        }
-        */
-
-
     }
     
-    // construction
+    /**
+     * This method initializes the movement speed of the ball.
+     * 
+     * @param ballPos  the coordination of the ball
+     */
     private void initBall(Point2D ballPos) {
     	
     	int speedX = 3;
@@ -130,6 +115,16 @@ public class Wall {
     	ball.setSpeed(speedX, speedY);
     }
 
+    /**
+     * This method creates the wall in the game with a single type of brick.
+     * 
+     * @param drawArea  the dimension of the interface of the game
+     * @param brickCnt  the number of the bricks
+     * @param lineCnt  the number of rows of the wall
+     * @param brickSizeRatio  the ratio of the dimension of a single brick
+     * @param type  the type of the brick
+     * @return  the wall
+     */
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
           if brickCount is not divisinstructionButtonle by line count,brickCount is adjusted to the biggest
@@ -171,7 +166,18 @@ public class Wall {
 
     }
 
-    private Brick[] makeChesstartButtonoardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typexitButton){
+    /**
+     * This method creates the wall in the game with two types of brick.
+     * 
+     * @param drawArea  the dimension of the interface of the game
+     * @param brickCnt  the number of the bricks
+     * @param lineCnt  the number of the rows of the wall
+     * @param brickSizeRatio  the dimension of the size of a single brick
+     * @param typeA  the first type of the brick
+     * @param typeB  the second type of the brick
+     * @return
+     */
+    private Brick[] makeChessBoardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
         
     	
     	/*
@@ -208,7 +214,7 @@ public class Wall {
             p.setLocation(x,y);
 
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typexitButton);
+            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
         }
 
       //make the last brick on the second line different
@@ -220,24 +226,47 @@ public class Wall {
         return tmp;
     }
 
+    /**
+     * This method creates a rubber ball.
+     * 
+     * @param ballPos  the coordination of the ball
+     */
     private void makeBall(Point2D ballPos){
         ball = new RubberBall(ballPos);
     }
 
+    /**
+     * this method creates the levels of the game.
+     * 
+     * @param drawArea  the dimension of the interface of the game
+     * @param brickCount  the number of the bricks
+     * @param lineCount  the number of rows of the wall
+     * @param brickDimensionRatio  the ratio of the dimension of a single brick
+     * @return  the levels
+     * 
+     * @see Brick[] wall.Wall.makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type)
+     * @see Brick[] wall.Wall.makeChessBoardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type)
+     */
     private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChesstartButtonoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChesstartButtonoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChesstartButtonoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[1] = makeChessBoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
+        tmp[2] = makeChessBoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
+        tmp[3] = makeChessBoardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
         return tmp;
     }
 
+    /**
+     * This method creates the movement of the player and the ball.
+     */
     public void move(){
         player.move();
         ball.move();
     }
 
+    /**
+     * This method reverses the movement of the ball if it interacts with other components except wall in the game, increases the score and discount a brick if the ball interacts with the wall, and discount the number of balls of the player if the ball falls against the ground.
+     */
     public void findImpacts(){
         if(player.impact(ball)){
             ball.reverseY();
@@ -247,9 +276,6 @@ public class Wall {
             * because for every brick program checks for horizontal and vertical impacts
             */
             brickCount--;
-            
-            //score.increaseScore(5);
-            
             scoreList.getLiveScore().increaseScore(5);
         }
         else if(impactBorder()) {
@@ -264,6 +290,11 @@ public class Wall {
         }
     }
 
+    /**
+     * This method checks the interaction between the ball and the wall, and reverses the movement of the ball according to which side of the brick the ball has interacted, and cracks the if the brick is cement brick.
+     * 
+     * @return  true if the ball interacts the wall, false otherwise.
+     */
     private boolean impactWall(){
         for(Brick b : bricks){
             switch(b.findImpact(ball)) {
@@ -287,23 +318,47 @@ public class Wall {
         return false;
     }
 
+    /**
+     * This method checks the interaction of the ball and the horizontal border of the game frame.
+     * 
+     * @return  true if the ball interacts with the horizontal border of the game frame, false otherwise
+     */
     private boolean impactBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
 
+    /**
+     * This method returns the number of the bricks.
+     * 
+     * @return  the number of the bricks
+     */
     public int getBrickCount(){
         return brickCount;
     }
 
+    /**
+     * This method returns the number of the balls.
+     * 
+     * @return  the number of the balls
+     */
     public int getBallCount(){
         return ballCount;
     }
 
+    /**
+     * This method checks if the ball is out of boundary of the game frame.
+     * 
+     * @return  true if the ball is out of the boundary of the game frame, false otherwise
+     */
     public boolean isBallLost(){
         return ballLost;
     }
 
+    /**
+     * this method resets the starting coordination and the starting movement speed of the ball.
+     * 
+     */
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
@@ -318,6 +373,9 @@ public class Wall {
         ballLost = false;
     }
 
+    /**
+     * This method resets the wall, the number of the bricks, and the number of the balls.
+     */
     public void wallReset(){
         for(Brick b : bricks)
             b.repair();
@@ -325,35 +383,74 @@ public class Wall {
         ballCount = 3;
     }
 
+    /**
+     * This method checks if the number of balls reaches zero, and therefore the player loses the game.
+     * 
+     * @return  true if the number of balls is zero, false otherwise
+     */
     public boolean ballEnd(){
         return ballCount == 0;
     }
 
+    /**
+     * This method checks if the number of bricks reaches zero, and therefore the player completes a level.
+     * 
+     * @return  true if the number of bricks is zero
+     */
     public boolean isDone(){
         return brickCount == 0;
     }
 
+    /**
+     * This method moves the wall to the next level, and resets the number of bricks.
+     */
     public void nextLevel(){
         bricks = levels[level++];
         this.brickCount = bricks.length;
     }
 
+    /**
+     * This method checks if the game is in the last level.
+     * 
+     * @return  true if the game is not in the last level, false otherwise
+     */
     public boolean hasLevel(){
         return level < levels.length;
     }
 
+    /**
+     * This method sets the horizontal movement speed of the ball.
+     * 
+     * @param s  horizontal movement speed of the ball
+     */
     public void setBallXSpeed(int s){
         ball.setXSpeed(s);
     }
 
+    /**
+     * This method sets the vertical movement speed of the ball.
+     * 
+     * @param s  vertical movement speed of the ball
+     */
     public void setBallYSpeed(int s){
         ball.setYSpeed(s);
     }
 
+    /**
+     * This method resets the number of the balls.
+     */
     public void resetBallCount(){
         ballCount = 3;
     }
 
+    /**
+     * This method creates the brick according to the passed in size and type parameter.
+     * 
+     * @param point  The coordination of the brick
+     * @param size  the dimension of the brick
+     * @param type  the type of the brick
+     * @return  the brick according to the passed in size and type parameter
+     */
     private Brick makeBrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){
@@ -372,122 +469,42 @@ public class Wall {
         return  out;
     }
     
+    /**
+     * This method returns the ball.
+     * 
+     * @return  the ball
+     */
     public Ball getBall() {
     	return this.ball;
     }
     
+    /**
+     * This method returns the array of brick.
+     * 
+     * @return  the array of brick
+     */
     public Brick[] getBricks() {
     	return this.bricks;
     	
     }
     
+    /**
+     * This method returns the player.
+     * 
+     * @return  the player
+     */
     public Player getPlayer() {
     	return this.player;
     }
     
-    /*
-    public int getScore() {
-    	return this.score.getScore();
-    }
-    
-    public Score getScoreList() {
-    	return score;
-    }
-    
-    
-    public String getHighScore() { // format: Alf:560
-    	
-    	FileReader readFile = null;
-    	BufferedReader reader = null;
-    	
-    	try
-    	{
-    		readFile = new FileReader("highscore.dat");
-    		reader = new BufferedReader(readFile);
-    		return reader.readLine();
-    	}
-    	
-    	catch (Exception e)
-    	{
-    		return "0"; // if we cannot create the dat file
-    	}
-    	
-    	finally
-    	{
-    		try {
-    			if (reader != null)
-    				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    	}
-   
-    }
-    
-    public void checkBreakHighScore() {
-    	
-    	if (highScore.equals(""))
-    	{
-    		return;
-    	}
-    	
-    	else if (score > Integer.parseInt(highScore.split(":")[1]))
-    	{
-    		String name = JOptionPane.showInputDialog("What is your name?");
-    		highScore = name + ":" + score;
-    		
-    		File highScoreFile = new File ("highscore.dat");
-    		if (!highScoreFile.exists())
-    		{
-    			try 
-    			{
-					highScoreFile.createNewFile();
-				} catch (IOException e) 
-    			{
-					e.printStackTrace();
-				}
-    		}
-    		
-    		FileWriter writeFile = null;
-    		BufferedWriter writer = null;
-    		
-    		try
-    		{
-    			writeFile = new FileWriter(highScoreFile);
-    			writer = new BufferedWriter(writeFile);
-    			writer.write(this.highScore);
-    		}
-    		
-    		catch (Exception e) 
-    		{
-    			
-    		}
-    		
-    		finally
-    		{
-    			try 
-    			{
-    				if (writer != null)
-    					writer.close();
-				} 
-    			catch (IOException e) 
-    			{
-					e.printStackTrace();
-				}
-    		}
-    	}
-    }
-    */
-    
-    //ScoreList scoreList = new ScoreList();
-  
-    
+    /**
+     * This method returns the score list.
+     * 
+     * @return  the score list
+     */
     public ScoreList getScoreList() {
     	return scoreList;
     }
     
     
-    
-    
-
 }

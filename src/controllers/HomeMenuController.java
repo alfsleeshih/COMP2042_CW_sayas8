@@ -8,6 +8,15 @@ import views.HighScoresFrame;
 import views.HomeMenu;
 import views.InstructionFrame;
 
+/**
+ * This class represents the controller between the home menu and the game board.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class HomeMenuController {
 
 	// view
@@ -16,7 +25,12 @@ public class HomeMenuController {
 	// model
 	GameFrame gameFrame;
 	
-	
+	/**
+	 * This is a constructor class of class HomeMenuController, it adds the action listeners to the buttons of the home menu.
+	 * 
+	 * @param homeMenu
+	 * @param gameFrame
+	 */
 	public HomeMenuController(HomeMenu homeMenu, GameFrame gameFrame) {
 		
 		this.homeMenu = homeMenu;
@@ -32,6 +46,10 @@ public class HomeMenuController {
 		
 	}
 	
+	/**
+	 * This class implements the action listener for the start button of the home menu.
+	 * 
+	 */
 	class StartButtonListener implements ActionListener{
 
 		@Override
@@ -42,6 +60,10 @@ public class HomeMenuController {
 		
 	}
 	
+	/**
+	 * This class implements the action listener for the exit button of the home menu.
+	 * 
+	 */
 	class ExitButtonListener implements ActionListener{
 
 		@Override
@@ -53,6 +75,10 @@ public class HomeMenuController {
 		
 	}
 	
+	/**
+	 * This class implements the action listener for the 'instructions' button of the home menu.
+	 * 
+	 */
 	class InstructionButtonListener implements ActionListener{
 
 		@Override
@@ -63,6 +89,10 @@ public class HomeMenuController {
 		
 	}
 	
+	/**
+	 * This class implements the action listener for the 'high scores' button of the home menu.
+	 * 
+	 */
 	class HighScoresButtonListener implements ActionListener{
 
 		@Override

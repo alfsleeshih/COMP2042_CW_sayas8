@@ -27,7 +27,15 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
 
-
+/**
+ * This class represents the frame of the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class GameFrame extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
@@ -38,6 +46,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private boolean gaming;
 
+    /**
+     * This is a constructor method of class GameFrame.
+     */
     public GameFrame(){
         super();
 
@@ -53,18 +64,14 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
         this.add(homeMenu,BorderLayout.CENTER);
         
-        /*
-        Example example = new Example(this);
-        
-        this.setSize(450,250);
-        this.add(example);
-        */
-
         this.setUndecorated(true);
 
     }
 
     
+    /**
+     * This method initializes the frame of the game.
+     */
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -73,7 +80,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setVisible(true);
     }
     
-
+    /**
+     * This method enables the game board frame and disable the current frame.
+     */
     public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
@@ -85,6 +94,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     }
 
+    /**
+     * This method locates the frame of the game in the center of the screen.
+     */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (size.width - this.getWidth()) / 2;

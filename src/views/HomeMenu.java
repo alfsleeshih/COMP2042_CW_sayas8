@@ -27,6 +27,15 @@ import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * This class represents the home menu of the game.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class HomeMenu extends JComponent {
 
     //private static final String GREETINGS = "Welcome to:";
@@ -78,31 +87,32 @@ public class HomeMenu extends JComponent {
     int containerWidth;
     int containerHeight;
 
-
+    /**
+     * This is the constructor method of class HomeMenu.
+     * 
+     * @param area  the dimension of the frame of the home menu
+     */
     public HomeMenu(Dimension area){
 
         this.setFocusable(true);
         this.requestFocusInWindow();
 
-        //this.owner = owner;
-        
-
         menuFace = new Rectangle(new Point(0,0),area);
         this.setPreferredSize(area);
 
-        
         gameTitleFont = new Font("Noto Mono",Font.BOLD,40);
         creditsFont = new Font("Monospaced",Font.PLAIN,10);
-        
         
         this.containerHeight = area.height;
         this.containerWidth = area.width;
         
         this.initButton();
 		
-		
     }
     
+    /**
+     * This method creates the 'start', 'exit', 'instructions', and 'high scores' button of the home menu.
+     */
     public void initButton() {
 		
 		int buttonWidth = 150;
@@ -137,7 +147,11 @@ public class HomeMenu extends JComponent {
         drawMenu((Graphics2D)g);
     }
 
-    
+    /**
+     * this method draws the home menu.
+     * 
+     * @param g2d  the graphics of the home menu
+     */
     public void drawMenu(Graphics2D g2d){	
 
         drawContainer(g2d);
@@ -164,16 +178,25 @@ public class HomeMenu extends JComponent {
         
     }
 
+    /**
+     * This method draws the container of the home menu.
+     * 
+     * @param g2d  the graphics of the container of the home menu
+     */
     private void drawContainer(Graphics2D g2d){
     	
     	//Image picture = Toolkit.getDefaultToolkit().getImage("background.jpg"); 
     	Image picture = new ImageIcon(this.getClass().getResource("/bg.jpg")).getImage();
     	g2d.drawImage(picture,0,0,this);
-    	
-    	
+    
         
     }
 
+    /**
+     * This method draws the text of the home menu.
+     * 
+     * @param g2d  the graphics of the text of the home menu
+     */
     private void drawText(Graphics2D g2d){
 
         g2d.setColor(TEXT_COLOR);
@@ -201,44 +224,38 @@ public class HomeMenu extends JComponent {
 
     }
     
-    /*
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==startButton) {
-			//System.out.println("Hello");
-			owner.enableGameBoard();
-		}
-		
-		else if(e.getSource()==exitButton) {
-			System.out.println("Goodbye " + System.getProperty("user.name"));
-            System.exit(0);
-		}
-		
-		else if(e.getSource()==instructionButton) {
-			new InstructionFrame();
-		}
-		
-		else if(e.getSource()==highScoresButton) {
-			new HighScoresFrame();
-		}
-		
-	}
-	*/
-    
-    
-	
+    /**
+     * This method adds action listener to the 'start' button of the home menu.
+     * 
+     * @param listenForStartButton  the class that implements action listener
+     */
 	public void addStartButtonListener (ActionListener listenForStartButton) {
 		this.startButton.addActionListener(listenForStartButton);
 	}
 	
+	/**
+     * This method adds action listener to the 'exit' button of the home menu.
+     * 
+     * @param listenForStartButton  the class that implements action listener
+     */
 	public void addExitButtonListener (ActionListener listenForExitButton) {
 		this.exitButton.addActionListener(listenForExitButton);
 	}
 	
+	/**
+     * This method adds action listener to the 'instructions' button of the home menu.
+     * 
+     * @param listenForStartButton  the class that implements action listener
+     */
 	public void addInstructionButtonListener (ActionListener listenForInstructionButton) {
 		this.instructionButton.addActionListener(listenForInstructionButton);
 	}
 	
+	/**
+     * This method adds action listener to the 'high scores' button of the home menu.
+     * 
+     * @param listenForStartButton  the class that implements action listener
+     */
 	public void addHighScoresButtonListener (ActionListener listenForHighScoresButton) {
 		this.highScoresButton.addActionListener(listenForHighScoresButton);
 	}
