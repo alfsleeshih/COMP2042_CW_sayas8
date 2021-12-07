@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Crack {
@@ -27,7 +28,13 @@ public class Crack {
     private int steps;
     private static Random rnd;
 
-
+    /**
+     * This is a constructor method of class Crack.
+     * 
+     * @param brick  the brick object
+     * @param crackDepth  the depth of the crack
+     * @param steps  the steps
+     */
     public Crack(Brick brick, int crackDepth, int steps){ // crackDepth = 1, steps = 35, by default
 
     	this.brick = brick;
@@ -39,16 +46,29 @@ public class Crack {
     }
 
 
-
+    /**
+     * This method draw the crack on the brick.
+     * 
+     * @return  the path of the crack
+     */
     public GeneralPath draw(){
 
         return crack;
     }
 
+    /**
+     * This method resets the path of the crack.
+     */
     public void reset(){
         crack.reset();
     }
 
+    /**
+     * This method sets the drawing of the crack on the brick.
+     * 
+     * @param point  the impacted point of the brick
+     * @param direction  the side of the brick that is impacted
+     */
     protected void makeCrack(Point2D point, int direction){ 
         Rectangle bounds = this.brick.getBrickFace().getBounds();
         
@@ -89,6 +109,12 @@ public class Crack {
         }
     }
 
+    /**
+     * This method draws the crack on the brick.
+     * 
+     * @param start  the staring coordination of the crack drawing
+     * @param end  the ending coordination of the crack drawing
+     */
     protected void makeCrack(Point start, Point end){ 
     	// start is the touched point of the brick
     	// end is a new random direction for the ball to go
@@ -110,7 +136,10 @@ public class Crack {
 
             x = (i * w) + start.x;
             y = (i * h) + start.y + randomInBounds(bound);
+            
+            //System.out.println(inMiddle(i,3,35));
 
+            //System.out.println(inMiddle(i,CRACK_SECTIONS,steps));
             if(inMiddle(i,CRACK_SECTIONS,steps)) // CRACK_SECTIONS = 3, by default
                 y += jumps(jump,JUMP_PROBABILITY); //JUMP_PROBABILITY = 0.7, by default
 
@@ -122,18 +151,43 @@ public class Crack {
         crack.append(path,true);
     }
 
+    /**
+     * This method creates a random point between the dimension of the brick.
+     * 
+     * @param bound  the dimension of the brick
+     * @return  random number between number between the dimension of the brick
+     */
     private int randomInBounds(int bound){
         int n = (bound * 2) + 1;
         return rnd.nextInt(n) - bound; // -1 0 1
     }
 
+    /**
+     * This method sets a limitation to create distinct crack drawing
+     * 
+     * @param i  the number from 1 to the steps
+     * @param steps  the steps
+     * @param divisions  the divisions
+     * @return  true if i is in between of the boundary limitation
+     */
     private boolean inMiddle(int i,int steps,int divisions){
-        int low = (steps / divisions);
-        int up = low * (divisions - 1);
-
-        return  (i > low) && (i < up);
+    	
+    	double stepsClone = steps;
+    	double divisionsClone = divisions;
+    	
+        double low = (stepsClone/divisionsClone); // 0
+        double up = low * (divisionsClone - 1); // 2
+        
+        return  (i > (int)low) && (i < (int)up);
     }
 
+    /**
+     * This method sets a probability to the crack drawing on the brick, and crate distinct crack drawing on the brick.
+     * 
+     * @param bound  the dimension of the brick
+     * @param probability  the probability to succeed
+     * @return  random number if succeed, 0 otherwise
+     */
     private int jumps(int bound,double probability){
 
         if(rnd.nextDouble() > probability)
@@ -142,6 +196,14 @@ public class Crack {
 
     }
 
+    /**
+     * This method creates a random point.
+     * 
+     * @param from  the starting coordination
+     * @param to  the destination
+     * @param direction  the direction to create random point
+     * @return  a random point
+     */
     private Point makeRandomPoint(Point from,Point to, int direction){
 
         Point out = new Point();

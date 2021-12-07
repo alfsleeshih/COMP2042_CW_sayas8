@@ -42,6 +42,14 @@ public class SteelBrick extends Brick {
     private Random rnd;
     private Shape brickFace;
 
+    /**
+     * This is a constructor method of class SteelBrick, it initializes the steel brick.
+     * 
+     * @param point  the upper left coordination of the steel brick
+     * @param size  the dimension of the steel brick
+     * 
+     * @see brick.Brick.Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength)
+     */
     public SteelBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
         rnd = new Random();
@@ -59,6 +67,9 @@ public class SteelBrick extends Brick {
         return brickFace;
     }
 
+    /**
+     * This method breaks the steel brick by checking the probability.
+     */
     public  boolean setImpact(Point2D point , int dir){
         if(super.isBroken())
             return false;
@@ -66,6 +77,9 @@ public class SteelBrick extends Brick {
         return  super.isBroken();
     }
 
+    /**
+     * This method sets the probability to break the steel brick.
+     */
     public void impact(){
         if(rnd.nextDouble() < STEEL_PROBABILITY){
             super.impact();

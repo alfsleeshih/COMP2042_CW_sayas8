@@ -25,7 +25,14 @@ public class CementBrick extends Brick {
     private Crack crack;
     private Shape brickFace;
 
-
+    /**
+     * This is a constructor method of class CementBrick, it initializes the cement brick.
+     * 
+     * @param point  the upper left coordination of the cement brick
+     * @param size  the dimension of the cement brick
+     * 
+     * @see brick.Brick.Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength)
+     */
     public CementBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,CEMENT_STRENGTH);
         crack = new Crack(this, DEF_CRACK_DEPTH,DEF_STEPS);
@@ -56,6 +63,9 @@ public class CementBrick extends Brick {
         return brickFace;
     }
 
+    /**
+     * This method cracks the cement brick when it is hit once.
+     */
     private void updateBrick(){
         if(!super.isBroken()){
             GeneralPath gp = crack.draw();
@@ -64,6 +74,9 @@ public class CementBrick extends Brick {
         }
     }
 
+    /**
+     * This method resets the cement brick.
+     */
     public void repair(){
         super.repair();
         crack.reset();

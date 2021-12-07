@@ -23,11 +23,14 @@ public class ClayBrick extends Brick {
     private static final Color DEF_BORDER = Color.GRAY;
     private static final int CLAY_STRENGTH = 1;
 
-
-
-
-
-
+    /**
+     * This is a constructor method of class ClayBrick, it initializes the clay brick.
+     * 
+     * @param point  the upper left coordination of the clay brick
+     * @param size  the dimension of the clay brick
+     * 
+     * @see brick.Brick.Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength)
+     */
     public ClayBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,CLAY_STRENGTH);
     }

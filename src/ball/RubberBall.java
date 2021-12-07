@@ -32,6 +32,15 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
+/**
+ * This class is a child class of class Ball, it represents a rubber ball.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class RubberBall extends Ball {
 
 
@@ -39,7 +48,13 @@ public class RubberBall extends Ball {
     private static final Color DEF_INNER_COLOR = new Color(255, 219, 88);
     private static final Color DEF_BORDER_COLOR = DEF_INNER_COLOR.darker().darker();
 
-    
+    /**
+     * This is a constructor method of class Ball, it initializes the speed, color, and surrounding points of the ball.
+     * 
+     * @param center  the center point of the ball
+     * 
+     * @see ball.Ball.Ball(Point2D center, int radiusWidth, int radiusHeight, Color inner, Color border)
+     */
     public RubberBall(Point2D center){
         super(center,DEF_RADIUS,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR);
     }
