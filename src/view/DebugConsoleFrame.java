@@ -19,7 +19,7 @@ package view;
 
 import javax.swing.*;
 
-import controller.DebugConsoleController;
+import controller.DebugConsolePanelController;
 import model.ball.Ball;
 import model.wall.Wall;
 
@@ -45,7 +45,7 @@ public class DebugConsoleFrame extends JDialog implements WindowListener{
     private DebugConsolePanel debugPanel;
     private GamePanel gameBoard;
     private Wall wall;
-    private DebugConsoleController debugConsoleController;
+    private DebugConsolePanelController debugConsoleController;
 
     /**
      * This is the constructor method of class DebugConsole.
@@ -64,7 +64,7 @@ public class DebugConsoleFrame extends JDialog implements WindowListener{
         debugPanel = new DebugConsolePanel();
         this.add(debugPanel,BorderLayout.CENTER);
 
-        this.debugConsoleController = new DebugConsoleController(debugPanel, wall);
+        this.debugConsoleController = new DebugConsolePanelController(debugPanel, wall);
 
         this.pack();
     }

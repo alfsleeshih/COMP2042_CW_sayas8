@@ -19,7 +19,7 @@ import view.DebugConsolePanel;
  * @since 0.1
  *
  */
-public class DebugConsoleController {
+public class DebugConsolePanelController {
 	
 	// view
 	DebugConsolePanel debugConsolePanel;
@@ -33,7 +33,7 @@ public class DebugConsoleController {
 	 * @param debugPanel  this is the view
 	 * @param wall this is the model
 	 */
-	public DebugConsoleController(DebugConsolePanel debugConsolePanel, Wall wall) {
+	public DebugConsolePanelController(DebugConsolePanel debugConsolePanel, Wall wall) {
 		
 		this.debugConsolePanel = debugConsolePanel;
 		this.wall = wall;
