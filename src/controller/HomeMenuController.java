@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import view.GameFrame;
 import view.HighScoresFrame;
-import view.HomeMenu;
+import view.HomeMenuPanel;
 import view.InstructionFrame;
 
 /**
@@ -20,7 +20,7 @@ import view.InstructionFrame;
 public class HomeMenuController {
 
 	// view
-	HomeMenu homeMenu;
+	HomeMenuPanel homeMenu;
 	
 	// model
 	GameFrame gameFrame;
@@ -31,7 +31,7 @@ public class HomeMenuController {
 	 * @param homeMenu
 	 * @param gameFrame
 	 */
-	public HomeMenuController(HomeMenu homeMenu, GameFrame gameFrame) {
+	public HomeMenuController(HomeMenuPanel homeMenu, GameFrame gameFrame) {
 		
 		this.homeMenu = homeMenu;
 		this.gameFrame = gameFrame;

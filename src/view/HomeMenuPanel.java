@@ -36,7 +36,7 @@ import java.awt.geom.Rectangle2D;
  * @since 0.1
  *
  */
-public class HomeMenu extends JComponent {
+public class HomeMenuPanel extends JComponent {
 
     //private static final String GREETINGS = "Welcome to:";
     private static final String GAME_TITLE = "BRICK DESTROY";
@@ -92,7 +92,7 @@ public class HomeMenu extends JComponent {
      * 
      * @param area  the dimension of the frame of the home menu
      */
-    public HomeMenu(Dimension area){
+    public HomeMenuPanel(Dimension area){
 
         this.setFocusable(true);
         this.requestFocusInWindow();
