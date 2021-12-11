@@ -17,10 +17,10 @@ import view.InstructionFrame;
  * @since 0.1
  *
  */
-public class HomeMenuController {
+public class HomeMenuPanelController {
 
 	// view
-	HomeMenuPanel homeMenu;
+	HomeMenuPanel homeMenuPanel;
 	
 	// model
 	GameFrame gameFrame;
@@ -31,18 +31,18 @@ public class HomeMenuController {
 	 * @param homeMenu
 	 * @param gameFrame
 	 */
-	public HomeMenuController(HomeMenuPanel homeMenu, GameFrame gameFrame) {
+	public HomeMenuPanelController(HomeMenuPanel homeMenuPanel, GameFrame gameFrame) {
 		
-		this.homeMenu = homeMenu;
+		this.homeMenuPanel = homeMenuPanel;
 		this.gameFrame = gameFrame;
 		
-		this.homeMenu.addStartButtonListener(new StartButtonListener());
+		this.homeMenuPanel.addStartButtonListener(new StartButtonListener());
 		
-		this.homeMenu.addExitButtonListener(new ExitButtonListener());
+		this.homeMenuPanel.addExitButtonListener(new ExitButtonListener());
 		
-		this.homeMenu.addInstructionButtonListener(new InstructionButtonListener());
+		this.homeMenuPanel.addInstructionButtonListener(new InstructionButtonListener());
 		
-		this.homeMenu.addHighScoresButtonListener(new HighScoresButtonListener());
+		this.homeMenuPanel.addHighScoresButtonListener(new HighScoresButtonListener());
 		
 	}
 	

@@ -19,7 +19,7 @@ package view;
 
 import javax.swing.*;
 
-import controller.HomeMenuController;
+import controller.HomeMenuPanelController;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -42,7 +42,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private GamePanel gameBoard;
     private HomeMenuPanel homeMenu;
-    private HomeMenuController homeMenuController;
+    private HomeMenuPanelController homeMenuPanelController;
 
     private boolean gaming;
 
@@ -60,7 +60,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         
         homeMenu = new HomeMenuPanel(new Dimension(450,250)); 
         
-        homeMenuController = new HomeMenuController(homeMenu, this);
+        homeMenuPanelController = new HomeMenuPanelController(homeMenu, this);
 
         this.add(homeMenu,BorderLayout.CENTER);
         
