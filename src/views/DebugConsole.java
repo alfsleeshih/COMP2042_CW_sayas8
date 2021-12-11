@@ -19,9 +19,9 @@ package views;
 
 import javax.swing.*;
 
-import ball.Ball;
 import controllers.DebugConsoleController;
-import wall.Wall;
+import model.ball.Ball;
+import model.wall.Wall;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;

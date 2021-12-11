@@ -1,4 +1,4 @@
-package brick;
+package model.brick;
 
 import java.awt.*;
 import java.awt.Point;
@@ -6,7 +6,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-import ball.Ball;
+import model.ball.Ball;
 
 /**
  * This class is an abstract parent class for the types of bricks in the game.

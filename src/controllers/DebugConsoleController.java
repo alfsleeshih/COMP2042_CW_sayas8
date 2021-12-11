@@ -1,6 +1,5 @@
 package controllers;
 
-import wall.Wall;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import model.wall.Wall;
 import views.DebugPanel;
 
 /**

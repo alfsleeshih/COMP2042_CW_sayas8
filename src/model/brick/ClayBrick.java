@@ -1,4 +1,4 @@
-package brick;
+package model.brick;
 
 import java.awt.*;
 import java.awt.Point;

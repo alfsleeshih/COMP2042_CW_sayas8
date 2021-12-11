@@ -15,13 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package player;
+package model.player;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-import ball.Ball;
+import model.ball.Ball;
 
 /**
  * This class represents the paddle in the game.
@@ -44,8 +44,8 @@ public class Player {
     private Rectangle playerFace;
     private Point ballPoint; //detect the center of the player
     private int moveAmount;
-    private int min;
-    private int max;
+    private int minX;
+    private int maxX;
 
     /**
      * This is a constructor method of class Player, it initializes the border shape of the player, the leftmost and rightmost coordination it could moved. 
@@ -59,8 +59,8 @@ public class Player {
         this.ballPoint = ballPoint;
         moveAmount = 0;
         playerFace = makeRectangle(width, height);
-        min = container.x + (width / 2);
-        max = min + container.width - width;
+        minX = container.x + (width / 2);
+        maxX = minX + container.width - width;
 
     }
 
@@ -91,7 +91,7 @@ public class Player {
      */
     public void move(){
         double x = ballPoint.getX() + moveAmount;
-        if(x < min || x > max)
+        if(x < minX || x > maxX)
             return;
         ballPoint.setLocation(x,ballPoint.getY());
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
@@ -144,5 +144,23 @@ public class Player {
      */
     public void setPlayerWidth(int width) {
     	this.playerFace = makeRectangle(width,10);
+    }
+    
+    /**
+     * This method returns the minimum x coordination of the player.
+     * 
+     * @return  the minimum x coordination of the player
+     */
+    public int getMinX() {
+    	return this.minX;
+    }
+    
+    /**
+     * This method returns the maximum x coordination of the player.
+     * 
+     * @return  the maximum x coordination of the player
+     */
+    public int getMaxX() {
+    	return this.maxX;
     }
 }

@@ -2,11 +2,13 @@ package controllers;
 
 import views.DebugConsole;
 import views.GameBoard;
-import wall.Wall;
+
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.JFrame;
+
+import model.wall.Wall;
 
 /**
  * This class represents the controller between the game board and the wall.

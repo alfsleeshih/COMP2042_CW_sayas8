@@ -1,4 +1,4 @@
-package ball;
+package model.ball;
 
 import java.awt.*;
 import java.awt.geom.Point2D;

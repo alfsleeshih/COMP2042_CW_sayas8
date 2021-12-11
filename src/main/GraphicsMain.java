@@ -21,9 +21,22 @@ import java.awt.*;
 
 import views.GameFrame;
 
-
+/**
+ * This is the main class of the program.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class GraphicsMain {
 
+	/**
+	 * This class invokes the game frame of the game, therefore initialize the game.
+	 * 
+	 * @param args  the character strings
+	 */
     public static void main(String[] args){
     
         EventQueue.invokeLater(() -> new GameFrame().initialize());

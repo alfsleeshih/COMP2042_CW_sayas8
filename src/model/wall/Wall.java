@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package wall;
+package model.wall;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -29,14 +29,14 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import ball.Ball;
-import ball.RubberBall;
-import brick.Brick;
-import brick.CementBrick;
-import brick.ClayBrick;
-import brick.Crack;
-import brick.SteelBrick;
-import player.Player;
+import model.ball.Ball;
+import model.ball.RubberBall;
+import model.brick.Brick;
+import model.brick.CementBrick;
+import model.brick.ClayBrick;
+import model.brick.Crack;
+import model.brick.SteelBrick;
+import model.player.Player;
 import score.Score;
 import score.ScoreList;
 

@@ -2,11 +2,11 @@ package views;
 
 import javax.swing.*;
 
-import ball.Ball;
-import brick.Brick;
 import controllers.GameBoardController;
-import player.Player;
-import wall.Wall;
+import model.ball.Ball;
+import model.brick.Brick;
+import model.player.Player;
+import model.wall.Wall;
 
 import java.awt.*;
 import java.awt.event.*;

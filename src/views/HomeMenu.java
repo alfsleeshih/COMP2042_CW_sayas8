@@ -186,7 +186,7 @@ public class HomeMenu extends JComponent {
     private void drawContainer(Graphics2D g2d){
     	
     	//Image picture = Toolkit.getDefaultToolkit().getImage("background.jpg"); 
-    	Image picture = new ImageIcon(this.getClass().getResource("/bg.jpg")).getImage();
+    	Image picture = new ImageIcon(this.getClass().getResource("/res/bg.jpg")).getImage();
     	g2d.drawImage(picture,0,0,this);
     
         
