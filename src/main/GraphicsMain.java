@@ -19,7 +19,7 @@ package main;
 
 import java.awt.*;
 
-import views.GameFrame;
+import view.GameFrame;
 
 /**
  * This is the main class of the program.

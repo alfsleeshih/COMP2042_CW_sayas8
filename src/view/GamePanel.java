@@ -1,8 +1,8 @@
-package views;
+package view;
 
 import javax.swing.*;
 
-import controllers.GameBoardController;
+import controller.GamePanelController;
 import model.ball.Ball;
 import model.brick.Brick;
 import model.player.Player;
@@ -22,7 +22,7 @@ import java.io.FileNotFoundException;
  * @since 0.1
  * 
  */
-public class GameBoard extends JComponent /*implements KeyListener,MouseListener,MouseMotionListener*/ {
+public class GamePanel extends JComponent /*implements KeyListener,MouseListener,MouseMotionListener*/ {
 
     private static final String CONTINUE = "Continue";
     private static final String RESTART = "Restart";
@@ -40,7 +40,7 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
     private Timer gameTimer;
 
     private Wall wall;
-    private GameBoardController gameBoardController;
+    private GamePanelController gamePanelController;
 
     private String message;
     //private String message2;
@@ -60,7 +60,7 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
      * 
      * @param owner  the frame of the game
      */
-    public GameBoard(JFrame owner){
+    public GamePanel(JFrame owner){
         super();
         
 
@@ -80,7 +80,7 @@ public class GameBoard extends JComponent /*implements KeyListener,MouseListener
         wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
 
         //debugConsole = new DebugConsole(owner,wall,this);
-        gameBoardController = new GameBoardController(owner, this, wall);
+        gamePanelController = new GamePanelController(owner, this, wall);
         //initialize the first level
         wall.nextLevel();
         

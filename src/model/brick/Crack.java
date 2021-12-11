@@ -7,6 +7,15 @@ import java.awt.geom.Point2D;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+/**
+ * This class represents the drawing of crack on the brick.
+ * 
+ * @author Shih Alf Slee
+ * @category Software Maintenance
+ * @version 2.0
+ * @since 0.1
+ *
+ */
 public class Crack {
 	
 	private static final int CRACK_SECTIONS = 3;

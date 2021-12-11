@@ -15,11 +15,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package views;
+package view;
 
 import javax.swing.*;
 
-import controllers.HomeMenuController;
+import controller.HomeMenuController;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -40,7 +40,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
 
-    private GameBoard gameBoard;
+    private GamePanel gameBoard;
     private HomeMenu homeMenu;
     private HomeMenuController homeMenuController;
 
@@ -56,7 +56,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
         this.setLayout(new BorderLayout());
 
-        gameBoard = new GameBoard(this);
+        gameBoard = new GamePanel(this);
         
         homeMenu = new HomeMenu(new Dimension(450,250)); 
         

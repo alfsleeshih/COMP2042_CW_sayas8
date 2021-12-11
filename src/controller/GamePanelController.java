@@ -1,7 +1,4 @@
-package controllers;
-
-import views.DebugConsole;
-import views.GameBoard;
+package controller;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -9,6 +6,8 @@ import java.awt.event.*;
 import javax.swing.JFrame;
 
 import model.wall.Wall;
+import view.DebugConsoleFrame;
+import view.GamePanel;
 
 /**
  * This class represents the controller between the game board and the wall.
@@ -19,11 +18,11 @@ import model.wall.Wall;
  * @since 0.1
  *
  */
-public class GameBoardController {
+public class GamePanelController {
 	
 	// view
-	GameBoard gameBoard;
-	DebugConsole debugConsole;
+	GamePanel gamePanel;
+	DebugConsoleFrame debugConsoleFrame;
 	
 	// model
 	Wall wall;
@@ -35,15 +34,15 @@ public class GameBoardController {
 	 * @param gameBoard  this is the view
 	 * @param wall  this is the model
 	 */
-	public GameBoardController(JFrame gameFrame, GameBoard gameBoard, Wall wall) {
+	public GamePanelController(JFrame gameFrame, GamePanel gamePanel, Wall wall) {
 		
-		this.gameBoard = gameBoard;
-		this.debugConsole = new DebugConsole(gameFrame,wall,gameBoard);
+		this.gamePanel = gamePanel;
+		this.debugConsoleFrame = new DebugConsoleFrame(gameFrame,wall,gamePanel);
 		this.wall = wall;
 		
-		this.gameBoard.addKeyL(new GameBoardListener());
-		this.gameBoard.addMouseL(new GameBoardListener());
-		this.gameBoard.addMouseMotionL(new GameBoardListener());
+		this.gamePanel.addKeyL(new GameBoardListener());
+		this.gamePanel.addMouseL(new GameBoardListener());
+		this.gamePanel.addMouseMotionL(new GameBoardListener());
 		
 	}
 	
@@ -73,26 +72,26 @@ public class GameBoardController {
 				break;
 				
 			case KeyEvent.VK_ESCAPE:
-				gameBoard.setShowPauseMenu();
-				gameBoard.doRepaint();
-				gameBoard.stopGameTimer();
+				gamePanel.setShowPauseMenu();
+				gamePanel.doRepaint();
+				gamePanel.stopGameTimer();
 				break;
 				
 			case KeyEvent.VK_SPACE:
-				if(!gameBoard.getShowPauseMenu()) {
-					if(gameBoard.isGameRunning()) {
-						gameBoard.stopGameTimer();
+				if(!gamePanel.getShowPauseMenu()) {
+					if(gamePanel.isGameRunning()) {
+						gamePanel.stopGameTimer();
 					}
 					
 					else {
-						gameBoard.startGameTimer();
+						gamePanel.startGameTimer();
 					}
 				}
 				break;
 				
 			case KeyEvent.VK_F1:
 				if (e.isAltDown() && e.isShiftDown()) {
-					debugConsole.setVisible(true);
+					debugConsoleFrame.setVisible(true);
 				}
 				
 			default:
@@ -116,24 +115,24 @@ public class GameBoardController {
 			
 			Point p = e.getPoint();
 			
-			if(!gameBoard.getShowPauseMenu()) {
+			if(!gamePanel.getShowPauseMenu()) {
 				return;
 			}
 			
-			else if(gameBoard.getContinueButtonRect().contains(p)) {
-				gameBoard.quitPauseMenu();
-				gameBoard.doRepaint();
+			else if(gamePanel.getContinueButtonRect().contains(p)) {
+				gamePanel.quitPauseMenu();
+				gamePanel.doRepaint();
 			}
 			
-			else if(gameBoard.getRestartButtonRect().contains(p)) {
-				gameBoard.setRestartMessage();
+			else if(gamePanel.getRestartButtonRect().contains(p)) {
+				gamePanel.setRestartMessage();
 				wall.ballReset();
 				wall.wallReset();
-				gameBoard.quitPauseMenu();
-				gameBoard.doRepaint();
+				gamePanel.quitPauseMenu();
+				gamePanel.doRepaint();
 			}
 			
-			else if(gameBoard.getExitButtonRect().contains(p)) {
+			else if(gamePanel.getExitButtonRect().contains(p)) {
 				System.out.println("Goodbye " + System.getProperty("user.name"));
 				System.exit(0);
 			}
@@ -175,12 +174,12 @@ public class GameBoardController {
 			
 			Point p = e.getPoint();
 			
-			if(gameBoard.getExitButtonRect() != null && gameBoard.getShowPauseMenu() == true) {
-				if (gameBoard.getExitButtonRect().contains(p) || gameBoard.getRestartButtonRect().contains(p) || gameBoard.getContinueButtonRect().contains(p)) {
-					gameBoard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			if(gamePanel.getExitButtonRect() != null && gamePanel.getShowPauseMenu() == true) {
+				if (gamePanel.getExitButtonRect().contains(p) || gamePanel.getRestartButtonRect().contains(p) || gamePanel.getContinueButtonRect().contains(p)) {
+					gamePanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				}
 				else {
-					gameBoard.setCursor(Cursor.getDefaultCursor());
+					gamePanel.setCursor(Cursor.getDefaultCursor());
 				}
 			}
 			

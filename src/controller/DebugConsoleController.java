@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +8,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import model.wall.Wall;
-import views.DebugPanel;
+import view.DebugConsolePanel;
 
 /**
  * This class represents the controller between the debug consolea and the wall.
@@ -22,7 +22,7 @@ import views.DebugPanel;
 public class DebugConsoleController {
 	
 	// view
-	DebugPanel debugPanel;
+	DebugConsolePanel debugConsolePanel;
 	
 	// model
 	Wall wall;
@@ -33,18 +33,18 @@ public class DebugConsoleController {
 	 * @param debugPanel  this is the view
 	 * @param wall this is the model
 	 */
-	public DebugConsoleController(DebugPanel debugPanel, Wall wall) {
+	public DebugConsoleController(DebugConsolePanel debugConsolePanel, Wall wall) {
 		
-		this.debugPanel = debugPanel;
+		this.debugConsolePanel = debugConsolePanel;
 		this.wall = wall;
 		
-		this.debugPanel.addSkipLevelListener(new SkipLevelListener());
+		this.debugConsolePanel.addSkipLevelListener(new SkipLevelListener());
 		
-		this.debugPanel.addResetBallsListener(new ResetBallsListener());
+		this.debugConsolePanel.addResetBallsListener(new ResetBallsListener());
 		
-		this.debugPanel.addBallXSpeedListener(new BallXSpeedListener());
+		this.debugConsolePanel.addBallXSpeedListener(new BallXSpeedListener());
 		
-		this.debugPanel.addBallYSpeedListener(new BallYSpeedListener());
+		this.debugConsolePanel.addBallYSpeedListener(new BallYSpeedListener());
 		
 	}
 	
@@ -90,7 +90,7 @@ public class DebugConsoleController {
 
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			wall.setBallXSpeed(debugPanel.getBallXSpeedSlider().getValue());
+			wall.setBallXSpeed(debugConsolePanel.getBallXSpeedSlider().getValue());
 			
 		}
 		
@@ -104,7 +104,7 @@ public class DebugConsoleController {
 
 		@Override
 		public void stateChanged(ChangeEvent e) {
-			wall.setBallYSpeed(debugPanel.getBallYSpeedSlider().getValue());
+			wall.setBallYSpeed(debugConsolePanel.getBallYSpeedSlider().getValue());
 			
 		}
 		

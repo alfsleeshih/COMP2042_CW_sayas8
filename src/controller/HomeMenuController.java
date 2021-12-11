@@ -1,12 +1,12 @@
-package controllers;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import views.GameFrame;
-import views.HighScoresFrame;
-import views.HomeMenu;
-import views.InstructionFrame;
+import view.GameFrame;
+import view.HighScoresFrame;
+import view.HomeMenu;
+import view.InstructionFrame;
 
 /**
  * This class represents the controller between the home menu and the game board.

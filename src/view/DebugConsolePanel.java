@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package views;
+package view;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -35,7 +35,7 @@ import java.awt.event.ActionListener;
  * @since 0.1
  *
  */
-public class DebugPanel extends JPanel {
+public class DebugConsolePanel extends JPanel {
 
 	private static final Color DEF_BKG = Color.black;
 
@@ -50,7 +50,7 @@ public class DebugPanel extends JPanel {
 	/**
 	 * This is a constructor method of class DebugPanel, it creates the 'skip level' and 'reset ball' button, and sliders to set the movement speed of the ball.
 	 */
-	public DebugPanel() {
+	public DebugConsolePanel() {
 		initialize();
 
 		skipLevelButton = new JButton("SKIP LEVEL");

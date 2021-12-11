@@ -25,8 +25,8 @@ abstract public class Ball {
     private Point2D left;
     private Point2D right;
 
-    private Color border;
-    private Color inner;
+    private Color borderColor;
+    private Color innerColor;
 
     private int speedX;
     private int speedY;
@@ -40,7 +40,7 @@ abstract public class Ball {
      * @param inner  the inner color of the ball
      * @param border  the border color of the ball
      */
-    public Ball(Point2D center, int radiusWidth, int radiusHeight, Color inner, Color border){
+    public Ball(Point2D center, int radiusWidth, int radiusHeight, Color innerColor, Color borderColor){
         this.center = center;
 
         up = new Point2D.Double();
@@ -56,8 +56,8 @@ abstract public class Ball {
 
 
         ballFace = makeBall(center,radiusHeight,radiusWidth);
-        this.border = border;
-        this.inner  = inner;
+        this.borderColor = borderColor;
+        this.innerColor  = innerColor;
         speedX = 0;
         speedY = 0;
     }
@@ -170,7 +170,7 @@ abstract public class Ball {
      * @return  the border color of the ball
      */
     public Color getBorderColor(){
-        return border;
+        return borderColor;
     }
 
     /**
@@ -178,7 +178,7 @@ abstract public class Ball {
      * @return  the inner color of the ball
      */
     public Color getInnerColor(){
-        return inner;
+        return innerColor;
     }
     
     /**

@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import views.HighScoresFrame;
+import view.HighScoresFrame;
 
 /**
  * This class represents a collection of scores in the game.

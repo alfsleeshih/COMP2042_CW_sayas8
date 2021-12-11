@@ -36,8 +36,8 @@ abstract public class Brick  {
     private String name;
     private Shape brickFace;
 
-    private Color border;
-    private Color inner;
+    private Color borderColor;
+    private Color innerColor;
 
     private int fullStrength;
     private int strength;
@@ -54,13 +54,13 @@ abstract public class Brick  {
      * @param inner  the inner color of the brick
      * @param strength  the number of the times require to touch the brick with the ball, in order to disappear the brick
      */
-    public Brick(String name, Point pos,Dimension size,Color border,Color inner,int strength){
+    public Brick(String name, Point pos,Dimension size,Color borderColor,Color innerColor,int strength){
         //rnd = new Random();
         broken = false;
         this.name = name;
         brickFace = makeBrickFace(pos,size);
-        this.border = border;
-        this.inner = inner;
+        this.borderColor = borderColor;
+        this.innerColor = innerColor;
         this.fullStrength = this.strength = strength;
 
     }
@@ -105,7 +105,7 @@ abstract public class Brick  {
      * @return  the border color of the brick
      */
     public Color getBorderColor(){
-        return  border;
+        return  borderColor;
     }
 
     /**
@@ -114,7 +114,7 @@ abstract public class Brick  {
      * @return  the border color of the brick
      */
     public Color getInnerColor(){
-        return inner;
+        return innerColor;
     }
 
     /**
